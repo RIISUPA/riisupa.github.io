@@ -1,0 +1,744 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="theme-color" content="#0C447C" />
+  <title>Reglamento Interno · RIISUPA</title>
+  <meta name="description" content="Reglamento Interno de Funcionamiento de la Red de Investigación e Innovación en Salud de Universidades de gestión Privada de Argentina (RIISUPA)." />
+  <meta name="author" content="RIISUPA" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Reglamento Interno de RIISUPA" />
+  <meta property="og:description" content="Reglamento Interno de Funcionamiento de la Red. 16 artículos que rigen la gobernanza, admisión, proyectos y modificaciones." />
+  <meta property="og:locale" content="es_AR" />
+  <meta property="og:site_name" content="RIISUPA" />
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" />
+  <link rel="stylesheet" href="assets/css/riisupa.css" />
+
+  <style>
+    /* ----- Estilos específicos del reglamento ----- */
+
+    .reglamento-wrap {
+      display: grid;
+      gap: 3rem;
+      grid-template-columns: 1fr;
+      padding: 3rem 0 6rem;
+    }
+
+    @media (min-width: 1024px) {
+      .reglamento-wrap {
+        grid-template-columns: 260px 1fr;
+        gap: 4rem;
+      }
+    }
+
+    .reglamento-toc {
+      position: sticky;
+      top: 5rem;
+      align-self: start;
+      max-height: calc(100vh - 6rem);
+      overflow-y: auto;
+      padding: 0 0.5rem 2rem 0;
+    }
+
+    .reglamento-toc h2 {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink-500);
+      font-weight: 400;
+      margin: 0 0 1rem;
+    }
+
+    .toc-section {
+      margin-bottom: 1.25rem;
+    }
+
+    .toc-section-title {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-600);
+      margin: 0 0 0.375rem;
+    }
+
+    .reglamento-toc ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.125rem;
+    }
+
+    .reglamento-toc a {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.375rem 0.5rem;
+      font-size: 0.8125rem;
+      text-decoration: none;
+      color: var(--ink-600);
+      border-left: 2px solid transparent;
+      transition: border-color 150ms ease, color 150ms ease, background 150ms ease;
+    }
+
+    .reglamento-toc a:hover {
+      color: var(--ink-900);
+      background: var(--surface-muted);
+    }
+
+    .reglamento-toc a.is-active {
+      border-left-color: var(--primary-600);
+      color: var(--primary-800);
+      background: var(--primary-50);
+    }
+
+    .toc-num {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: var(--ink-400);
+      min-width: 1.5rem;
+    }
+
+    .reglamento-toc a.is-active .toc-num {
+      color: var(--primary-600);
+    }
+
+    .reglamento-body {
+      max-width: 68ch;
+      font-size: 1.0625rem;
+      line-height: 1.75;
+      color: var(--ink-700);
+    }
+
+    .reglamento-body p {
+      margin: 0 0 1.25rem;
+      text-wrap: pretty;
+    }
+
+    .reglamento-body .chapter {
+      padding-top: 3rem;
+      margin-bottom: 2rem;
+      border-top: 1px solid var(--ink-200);
+    }
+
+    .reglamento-body .chapter:first-child {
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .chapter-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-600);
+      margin: 0 0 0.75rem;
+    }
+
+    .chapter-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.625rem, 3vw, 2.25rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--ink-900);
+      margin: 0 0 1.5rem;
+      font-weight: 500;
+    }
+
+    .article {
+      padding-top: 2rem;
+      margin-top: 2rem;
+      scroll-margin-top: 5rem;
+    }
+
+    .article:first-of-type {
+      padding-top: 0;
+      margin-top: 0;
+    }
+
+    .article-number {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--ink-500);
+      margin: 0;
+    }
+
+    .article-title {
+      font-family: var(--font-serif);
+      font-size: 1.375rem;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--ink-900);
+      margin: 0.375rem 0 1rem;
+      font-weight: 500;
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+
+    .article-anchor {
+      opacity: 0;
+      transition: opacity 150ms ease;
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      color: var(--ink-400);
+      text-decoration: none;
+    }
+
+    .article:hover .article-anchor,
+    .article-title:hover .article-anchor {
+      opacity: 1;
+    }
+
+    .article-anchor:hover { color: var(--primary-600); }
+
+    .reglamento-body ul {
+      margin: 0.75rem 0 1.5rem;
+      padding: 0 0 0 1.25rem;
+      list-style: none;
+    }
+
+    .reglamento-body ul li {
+      position: relative;
+      padding-left: 0.5rem;
+      margin-bottom: 0.75rem;
+      text-wrap: pretty;
+    }
+
+    .reglamento-body ul li::before {
+      content: "";
+      position: absolute;
+      left: -0.75rem;
+      top: 0.7rem;
+      width: 0.375rem;
+      height: 1px;
+      background: var(--accent-600);
+    }
+
+    .reglamento-body ul li strong {
+      display: block;
+      font-weight: 500;
+      color: var(--ink-800);
+      margin-bottom: 0.25rem;
+    }
+
+    .drop-cap::first-letter {
+      font-family: var(--font-serif);
+      font-size: 3.5em;
+      line-height: 0.85;
+      float: left;
+      padding: 0.25rem 0.5rem 0 0;
+      font-weight: 500;
+      color: var(--primary-800);
+    }
+
+    .fundamentacion {
+      background: var(--surface-muted);
+      border-left: 3px solid var(--accent-600);
+      padding: 2rem;
+      margin: 0 0 3rem;
+      font-family: var(--font-serif);
+      font-size: 1.0625rem;
+      line-height: 1.65;
+      color: var(--ink-800);
+    }
+
+    .fundamentacion p {
+      font-family: var(--font-serif);
+      margin: 0 0 1rem;
+    }
+
+    .fundamentacion p:last-child { margin-bottom: 0; }
+
+    .callout {
+      background: var(--primary-50);
+      border-left: 3px solid var(--primary-600);
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-family: var(--font-sans);
+      font-size: 0.9375rem;
+      line-height: 1.65;
+      color: var(--primary-900);
+    }
+
+    .callout strong {
+      color: var(--primary-800);
+      font-weight: 500;
+    }
+
+    .callout p { margin: 0; }
+
+    .metadata-row {
+      margin: 3rem 0;
+      padding: 1.5rem;
+      background: white;
+      border: 1px solid var(--ink-200);
+      display: grid;
+      gap: 1.25rem;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+
+    .metadata-row dt {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink-500);
+      margin: 0;
+    }
+
+    .metadata-row dd {
+      margin: 0.25rem 0 0;
+      font-size: 0.9375rem;
+      color: var(--ink-800);
+    }
+
+    .reglamento-actions {
+      margin-top: 4rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--ink-200);
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    @media print {
+      .site-header,
+      .site-footer,
+      .reglamento-toc,
+      .reglamento-actions,
+      .skip-link { display: none !important; }
+
+      .reglamento-wrap {
+        grid-template-columns: 1fr;
+        padding: 0;
+      }
+
+      .reglamento-body { max-width: none; font-size: 11pt; line-height: 1.5; }
+      .chapter { page-break-before: always; }
+      .article { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Saltar al contenido principal</a>
+
+  <div data-slot="header"></div>
+
+  <main id="main">
+
+    <header class="page-header">
+      <div class="container">
+        <p class="eyebrow">Documento fundacional</p>
+        <h1 class="display-lg text-balance">Reglamento Interno de Funcionamiento</h1>
+        <p class="lead" style="max-width: 760px;">
+          Norma que rige el funcionamiento de la Red de Investigación e Innovación en Salud de Universidades de gestión Privada de Argentina. Establece su denominación, objetivos, autoridades, mecanismos de admisión y baja, proyectos de investigación y el procedimiento para modificar el propio reglamento.
+        </p>
+
+        <dl class="metadata-row">
+          <div>
+            <dt>Versión vigente</dt>
+            <dd>1.0</dd>
+          </div>
+          <div>
+            <dt>Aprobado por</dt>
+            <dd>Asamblea de Miembros</dd>
+          </div>
+          <div>
+            <dt>Estructura</dt>
+            <dd>4 secciones · 16 artículos</dd>
+          </div>
+          <div>
+            <dt>Modificación</dt>
+            <dd>Art. 16 — 2/3 de los presentes</dd>
+          </div>
+        </dl>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="reglamento-wrap">
+
+        <aside class="reglamento-toc" aria-label="Índice del reglamento">
+          <h2>Índice</h2>
+
+          <div class="toc-section">
+            <p class="toc-section-title">Fundamentación</p>
+            <ul>
+              <li><a href="#fundamentacion"><span class="toc-num">—</span><span>Propósito</span></a></li>
+            </ul>
+          </div>
+
+          <div class="toc-section">
+            <p class="toc-section-title">I · Disposiciones generales</p>
+            <ul>
+              <li><a href="#articulo-1"><span class="toc-num">Art. 1</span><span>Denominación</span></a></li>
+              <li><a href="#articulo-2"><span class="toc-num">Art. 2</span><span>Domicilio</span></a></li>
+              <li><a href="#articulo-3"><span class="toc-num">Art. 3</span><span>Objetivos</span></a></li>
+            </ul>
+          </div>
+
+          <div class="toc-section">
+            <p class="toc-section-title">II · Autoridades y miembros</p>
+            <ul>
+              <li><a href="#articulo-4"><span class="toc-num">Art. 4</span><span>Autoridades</span></a></li>
+              <li><a href="#articulo-5"><span class="toc-num">Art. 5</span><span>Asamblea de Miembros</span></a></li>
+              <li><a href="#articulo-6"><span class="toc-num">Art. 6</span><span>Comité Ejecutivo</span></a></li>
+              <li><a href="#articulo-7"><span class="toc-num">Art. 7</span><span>Categorías de miembros</span></a></li>
+              <li><a href="#articulo-8"><span class="toc-num">Art. 8</span><span>Condiciones para la incorporación</span></a></li>
+              <li><a href="#articulo-9"><span class="toc-num">Art. 9</span><span>Derechos de los miembros</span></a></li>
+              <li><a href="#articulo-10"><span class="toc-num">Art. 10</span><span>Baja de miembros</span></a></li>
+              <li><a href="#articulo-11"><span class="toc-num">Art. 11</span><span>Renovación y reemplazo</span></a></li>
+              <li><a href="#articulo-12"><span class="toc-num">Art. 12</span><span>Comisiones</span></a></li>
+            </ul>
+          </div>
+
+          <div class="toc-section">
+            <p class="toc-section-title">III · Proyectos de investigación</p>
+            <ul>
+              <li><a href="#articulo-13"><span class="toc-num">Art. 13</span><span>Presentación y aval</span></a></li>
+              <li><a href="#articulo-14"><span class="toc-num">Art. 14</span><span>Financiamiento</span></a></li>
+              <li><a href="#articulo-15"><span class="toc-num">Art. 15</span><span>Propiedad intelectual</span></a></li>
+            </ul>
+          </div>
+
+          <div class="toc-section">
+            <p class="toc-section-title">IV · Consideraciones generales</p>
+            <ul>
+              <li><a href="#articulo-16"><span class="toc-num">Art. 16</span><span>Modificación del reglamento</span></a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="reglamento-body">
+
+          <section id="fundamentacion" class="chapter" style="padding-top: 0; border-top: 0;">
+            <p class="chapter-label">Fundamentación</p>
+            <h2 class="chapter-title">Conformación de la Red</h2>
+
+            <div class="fundamentacion">
+              <p class="drop-cap">Se propone la conformación de una "Red de Investigación e Innovación en Salud de Universidades de gestión privada de Argentina" con el objeto de potenciar el trabajo colaborativo entre las instituciones que la integren, que apunte a contribuir a generar evidencia y soluciones a los problemas que el campo de la salud demande, y fortalezca la colaboración institucional.</p>
+              <p>La complejidad de los escenarios socioculturales influye en la conformación de fenómenos en el campo de la salud, que exigen estrategias de abordaje que articulen perspectivas, instituciones, recursos, y producción de evidencia científica e innovación tecnológica. La solución de problemas complejos requiere de mayores niveles de organización en redes institucionales. En ese sentido, la conformación de esta Red busca promover un trabajo sinérgico en pos del diseño y aplicación de líneas de acción significativas para los diversos contextos en los que se asientan las universidades integrantes.</p>
+              <p>La conformación de una Red permitirá establecer un sistema de alta interacción entre las instituciones, potenciando la colaboración, la creatividad, y la innovación.</p>
+              <p>Las redes favorecen enfoques multidimensionales y diversas perspectivas, lo que genera vínculos organizacionales que amplían las capacidades y el alcance de cada institución integrante. Como sistema abierto y dinámico, la Red facilita el intercambio continuo entre sus miembros, promoviendo el uso compartido de recursos y el desarrollo de soluciones innovadoras frente a los desafíos del campo de la salud.</p>
+              <p>La esfera universitaria como tal atraviesa diversos retos y se presenta como una plaza con capacidad innovadora para la contribución científico-tecnológica en el país. El impacto que tienen no es solo formativo para los individuos, sino también para el compromiso de contribución hacia la sociedad, su entorno y sus instituciones. Las universidades son claves para generar y sostener en el tiempo comunidades académicas y de investigación.</p>
+              <p>La "Red de Investigación e Innovación en Salud de Universidades de gestión privada de Argentina" es una iniciativa conjunta impulsada por varias universidades privadas del país, orientada al fortalecimiento de la investigación y la innovación. Su creación tiene como propósito facilitar una colaboración más estrecha entre instituciones en sus distintas áreas de actividad. Surge a partir de coincidir que su conformación contribuirá a mejorar el nivel de institucionalización de la investigación, lograr un acercamiento entre los distintos actores que desarrollan sus actividades vinculadas a las ciencias de la salud, con el objeto de orientar prioridades para el trabajo colaborativo y a potenciar la investigación misma como resultado de la colaboración interinstitucional.</p>
+            </div>
+          </section>
+
+          <section class="chapter">
+            <p class="chapter-label">Sección I</p>
+            <h2 class="chapter-title">Disposiciones generales</h2>
+
+            <div id="articulo-1" class="article">
+              <p class="article-number">Artículo 1</p>
+              <h3 class="article-title">
+                Denominación
+                <a href="#articulo-1" class="article-anchor" aria-label="Enlace permanente al artículo 1">#</a>
+              </h3>
+              <p>La presente red se denominará <strong>"Red de Investigación e Innovación en Salud de Universidades de gestión Privada de Argentina" – RIISUPA</strong> (en adelante, "la Red"). Constituye una asociación voluntaria de universidades de gestión privadas de la República Argentina, sin fines de lucro, cuyo objetivo principal es fomentar y fortalecer la investigación en salud. Se constituye con respeto al principio de autonomía universitaria considerando la libertad individual de cada universidad para tomar sus propias decisiones.</p>
+            </div>
+
+            <div id="articulo-2" class="article">
+              <p class="article-number">Artículo 2</p>
+              <h3 class="article-title">
+                Domicilio
+                <a href="#articulo-2" class="article-anchor" aria-label="Enlace permanente al artículo 2">#</a>
+              </h3>
+              <p>La Red no tendrá un domicilio único. Cada universidad participante conservará su domicilio legal y su autonomía. La coordinación general de la Red se establecerá en la universidad que ostente la presidencia <em>pro tempore</em>, según lo estipulado en el presente reglamento.</p>
+            </div>
+
+            <div id="articulo-3" class="article">
+              <p class="article-number">Artículo 3</p>
+              <h3 class="article-title">
+                Objetivos
+                <a href="#articulo-3" class="article-anchor" aria-label="Enlace permanente al artículo 3">#</a>
+              </h3>
+              <p>La Red tendrá como objeto primordial impulsar la investigación en salud en el ámbito académico, promoviendo la colaboración interinstitucional, la optimización de recursos y la transferencia de conocimiento, en el marco de iniciativas colaborativas.</p>
+
+              <p><strong>Sus objetivos específicos son:</strong></p>
+              <ul>
+                <li>Generar conocimiento científico de alto impacto que permita desarrollar y ejecutar proyectos de investigación colaborativos que aborden desafíos de salud relevantes a nivel local y regional.</li>
+                <li>Fomentar la investigación interdisciplinaria para abordar problemas de salud complejos desde múltiples perspectivas.</li>
+                <li>Impulsar la cooperación científica entre investigadores, grupos y centros de investigación de universidades privadas, promoviendo proyectos colaborativos, consolidación de líneas de investigación y realización de publicaciones conjuntas.</li>
+                <li>Fortalecer la producción científica en salud desde las universidades privadas, promoviendo la articulación interinstitucional, la cooperación académica y el desarrollo de investigaciones con impacto social y territorial.</li>
+                <li>Promover la visibilidad, difusión y aplicación del conocimiento generado, mediante estrategias compartidas de publicación científica, vinculación con el sistema de salud y transferencia de resultados a la comunidad científica, el sector público, a los ámbitos de toma de decisión y a la sociedad en general.</li>
+                <li>Impulsar la participación en convocatorias de financiamiento nacional e internacional de manera conjunta, favoreciendo el acceso a recursos para la ejecución de proyectos de investigación conjuntos.</li>
+                <li>Fortalecer las capacidades de investigación de las universidades miembros a través del intercambio de experiencias, conocimientos, la optimización de recursos y el acceso a infraestructuras compartidas.</li>
+                <li>Establecer mecanismos de intercambio de información, bases de datos y recursos bibliográficos, recursos tecnológicos, entre otros, entre los miembros.</li>
+                <li>Integrarse a otras redes existentes locales, regionales y/o internacionales que tengan objetivos afines y permitan escalar su alcance.</li>
+                <li>Promover la innovación en salud como eje para mejorar la calidad de vida humana y generar un impacto positivo en la sociedad.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="chapter">
+            <p class="chapter-label">Sección II</p>
+            <h2 class="chapter-title">Autoridades y miembros</h2>
+
+            <div id="articulo-4" class="article">
+              <p class="article-number">Artículo 4</p>
+              <h3 class="article-title">
+                Autoridades
+                <a href="#articulo-4" class="article-anchor" aria-label="Enlace permanente al artículo 4">#</a>
+              </h3>
+              <p>Los órganos que coordinen el funcionamiento de la Red serán:</p>
+              <ul>
+                <li>La Asamblea de Miembros.</li>
+                <li>El Comité Ejecutivo.</li>
+              </ul>
+            </div>
+
+            <div id="articulo-5" class="article">
+              <p class="article-number">Artículo 5</p>
+              <h3 class="article-title">
+                La Asamblea de Miembros
+                <a href="#articulo-5" class="article-anchor" aria-label="Enlace permanente al artículo 5">#</a>
+              </h3>
+              <p>La Asamblea de Miembros de la Red estará integrada por un representante titular y un suplente por cada universidad miembro, que se desempeñen en las áreas de Investigación, Ciencia y Tecnología de la institución, con experiencia en investigación o en gestión de ciencia, tecnología e innovación.</p>
+
+              <p><strong>Son funciones de la Asamblea de Miembros:</strong></p>
+              <ul>
+                <li>Definir los lineamientos generales y estratégicos de la Red.</li>
+                <li>Aprobar el plan de trabajo anual de la Red elaborado por el Comité Ejecutivo.</li>
+                <li>Elegir y remover a los miembros del Comité Ejecutivo.</li>
+                <li>Modificar el presente reglamento, en caso de ser necesario, debiendo contar con la mayoría de los votos, representado por dos tercios de los presentes.</li>
+                <li>Aprobar la admisión de nuevos miembros y la baja de los existentes.</li>
+                <li>Resolver todas aquellas cuestiones que no estén en el presente reglamento y necesiten una intervención extraordinaria.</li>
+              </ul>
+
+              <p>La Asamblea de Miembros se reunirá en sesión ordinaria, al menos, dos (2) veces al año. Podrá reunirse en sesión extraordinaria por decisión del Comité Ejecutivo o a solicitud de los miembros de la Red.</p>
+            </div>
+
+            <div id="articulo-6" class="article">
+              <p class="article-number">Artículo 6</p>
+              <h3 class="article-title">
+                El Comité Ejecutivo
+                <a href="#articulo-6" class="article-anchor" aria-label="Enlace permanente al artículo 6">#</a>
+              </h3>
+              <p>El Comité Ejecutivo es el órgano de administración y representación de la Red. Estará integrado por un Presidente, un Vicepresidente y un Secretario, de diferentes universidades, que tendrán una duración de dos (2) años en sus funciones. Los miembros del Comité Ejecutivo deberán ser representantes de las universidades miembro. Al finalizar los dos (2) años de mandato, se convocará una elección para renovar todos los cargos del Comité Ejecutivo. Los miembros salientes no podrán ser reelegidos en el mismo cargo en el período inmediato siguiente, pero sí en otros cargos o en ciclos posteriores.</p>
+
+              <p><strong>Son funciones del Comité Ejecutivo:</strong></p>
+              <ul>
+                <li>Ejecutar las políticas y decisiones de la Asamblea de Miembros.</li>
+                <li>Elaborar el plan de trabajo anual y presentarlo a la Asamblea de Miembros para su aprobación.</li>
+                <li>Representar a la Red ante terceros.</li>
+                <li>Avalar las propuestas de presentación de proyectos de financiamiento en el marco de la Red.</li>
+                <li>Convocar a la Asamblea de Miembros.</li>
+                <li>Informar periódicamente a los miembros sobre las actividades de la Red.</li>
+                <li>Resolver las cuestiones de índole operativa y administrativa de la Red.</li>
+                <li>El Presidente del Comité Ejecutivo ejercerá la representación de la Red.</li>
+              </ul>
+            </div>
+
+            <div id="articulo-7" class="article">
+              <p class="article-number">Artículo 7</p>
+              <h3 class="article-title">
+                Categorías de miembros
+                <a href="#articulo-7" class="article-anchor" aria-label="Enlace permanente al artículo 7">#</a>
+              </h3>
+              <p>La Red estará conformada por universidades privadas de Argentina, integrantes de la Unidad de Vinculación Académica de Ciencia y Técnica del Consejo de Rectores de las Universidades Privadas (CRUP), que expresamente lo deseen, <strong>sin membresías ni cuotas</strong>, y serán consideradas miembros de pleno derecho desde el momento de su incorporación y mientras cumplan con los requisitos establecidos en este reglamento. Se establecerá una única categoría de miembros activos.</p>
+            </div>
+
+            <div id="articulo-8" class="article">
+              <p class="article-number">Artículo 8</p>
+              <h3 class="article-title">
+                Condiciones para la incorporación
+                <a href="#articulo-8" class="article-anchor" aria-label="Enlace permanente al artículo 8">#</a>
+              </h3>
+              <p>Para incorporación de nuevos miembros a la Red, las universidades deberán cumplir con los siguientes requisitos:</p>
+              <ul>
+                <li>Ser una universidad de gestión privada con personería jurídica reconocida por el Ministerio de Educación de la Nación Argentina.</li>
+                <li>Contar con trayectoria y capacidad institucional demostrable en investigación en temas vinculados a ciencias de la salud.</li>
+                <li>Ser miembro del CRUP (Consejo de Rectores de Universidades Privadas).</li>
+                <li>Manifestar formalmente su voluntad de adherirse a la Red mediante una nota que deberá estar firmada por la máxima autoridad académica o, en su defecto, por el representante legal.</li>
+                <li>Comprometerse a cumplir con los principios y disposiciones de este reglamento.</li>
+              </ul>
+
+              <div class="callout">
+                <p><strong>Sumar tu universidad.</strong> Si cumplís con estos requisitos, podés iniciar la solicitud desde el repositorio <code style="font-family: var(--font-mono); font-size: 0.875rem;">onboarding</code> en GitHub. El Comité Ejecutivo verifica el cumplimiento y lo eleva a la siguiente Asamblea.</p>
+              </div>
+            </div>
+
+            <div id="articulo-9" class="article">
+              <p class="article-number">Artículo 9</p>
+              <h3 class="article-title">
+                Derechos de los miembros
+                <a href="#articulo-9" class="article-anchor" aria-label="Enlace permanente al artículo 9">#</a>
+              </h3>
+              <p>Las universidades miembros de la Red accederán a los siguientes derechos:</p>
+              <ul>
+                <li>Participar en las actividades organizadas por la Red.</li>
+                <li>Postular proyectos de investigación conjuntos, según interés y líneas de investigación, y acceder a las oportunidades de financiamiento que la Red gestione y/o proponga.</li>
+                <li>Visibilizar el nombre y la imagen de la Red en actividades relacionadas con sus objetivos.</li>
+                <li>Proponer iniciativas y proyectos al Comité Ejecutivo.</li>
+                <li>Acceder a la información y recursos compartidos por la Red.</li>
+              </ul>
+            </div>
+
+            <div id="articulo-10" class="article">
+              <p class="article-number">Artículo 10</p>
+              <h3 class="article-title">
+                Baja de miembros
+                <a href="#articulo-10" class="article-anchor" aria-label="Enlace permanente al artículo 10">#</a>
+              </h3>
+              <p>Las universidades miembros pueden solicitar su baja o perder su condición de miembro debido a alguna de las causas que se detallan:</p>
+              <ul>
+                <li>Renuncia voluntaria, notificada formalmente por escrito al Comité Ejecutivo.</li>
+                <li>Pérdida de la personería jurídica como universidad de gestión privada en Argentina.</li>
+                <li>Situaciones no contempladas en este reglamento que se resolverán en Asamblea convocada para tal fin.</li>
+              </ul>
+            </div>
+
+            <div id="articulo-11" class="article">
+              <p class="article-number">Artículo 11</p>
+              <h3 class="article-title">
+                Renovación y reemplazo de autoridades
+                <a href="#articulo-11" class="article-anchor" aria-label="Enlace permanente al artículo 11">#</a>
+              </h3>
+              <p>En caso de renuncia, impedimento, cese de funciones institucionales o inactividad prolongada de alguno de los miembros del Comité Ejecutivo, se procederá de la siguiente manera:</p>
+              <ul>
+                <li><strong>Renuncia o cese de funciones institucionales.</strong> La universidad de origen del miembro cesante propondrá un nuevo representante para completar el mandato en curso, el cual deberá ser aprobado por la mayoría simple de los miembros de la Asamblea. Si la universidad no propusiera reemplazo en un plazo de treinta (30) días, la Asamblea podrá designar un nuevo integrante de otra universidad, de manera transitoria, hasta la siguiente elección ordinaria.</li>
+                <li><strong>Inactividad prolongada.</strong> Se considerará inactividad prolongada la falta de participación injustificada en dos (2) sesiones consecutivas de la Red durante un período de doce (12) meses. El Comité Ejecutivo podrá iniciar un proceso de reemplazo, previa notificación formal a la universidad representada.</li>
+              </ul>
+            </div>
+
+            <div id="articulo-12" class="article">
+              <p class="article-number">Artículo 12</p>
+              <h3 class="article-title">
+                Comisiones
+                <a href="#articulo-12" class="article-anchor" aria-label="Enlace permanente al artículo 12">#</a>
+              </h3>
+              <p>Se crearán comisiones <em>ad hoc</em> para abordar y trabajar temáticas específicas. El Comité Ejecutivo de la Red determinará su creación, vigencia, modificación, y supervisará su trabajo.</p>
+            </div>
+          </section>
+
+          <section class="chapter">
+            <p class="chapter-label">Sección III</p>
+            <h2 class="chapter-title">De los proyectos de investigación</h2>
+
+            <div id="articulo-13" class="article">
+              <p class="article-number">Artículo 13</p>
+              <h3 class="article-title">
+                Presentación y aval institucional de proyectos
+                <a href="#articulo-13" class="article-anchor" aria-label="Enlace permanente al artículo 13">#</a>
+              </h3>
+              <p>Los proyectos de investigación que se desarrollen de manera colaborativa en el marco de la Red deberán ser evaluados previamente por un referente temático antes de elevarse al Comité Ejecutivo para su consideración teniendo en cuenta su pertinencia, viabilidad y potencial impacto, antes de ser presentados en una convocatoria que requiera la pertenencia a esta Red, ya sea de financiamiento nacional o extranjero.</p>
+            </div>
+
+            <div id="articulo-14" class="article">
+              <p class="article-number">Artículo 14</p>
+              <h3 class="article-title">
+                Financiamiento de proyectos
+                <a href="#articulo-14" class="article-anchor" aria-label="Enlace permanente al artículo 14">#</a>
+              </h3>
+              <p>El financiamiento de los proyectos de investigación podrá provenir de fuentes internas de las universidades miembros, de convocatorias públicas o privadas, nacionales o internacionales.</p>
+            </div>
+
+            <div id="articulo-15" class="article">
+              <p class="article-number">Artículo 15</p>
+              <h3 class="article-title">
+                Propiedad intelectual
+                <a href="#articulo-15" class="article-anchor" aria-label="Enlace permanente al artículo 15">#</a>
+              </h3>
+              <p>La propiedad intelectual de los resultados de los proyectos de investigación desarrollados en el marco de la Red será regulada mediante acuerdos específicos entre las universidades participantes en cada proyecto, respetando la normativa vigente en materia de propiedad intelectual. Se recomienda la elaboración de acuerdos de consorcio para cada proyecto, con revisión de las áreas legales de las universidades participantes.</p>
+            </div>
+          </section>
+
+          <section class="chapter">
+            <p class="chapter-label">Sección IV</p>
+            <h2 class="chapter-title">Consideraciones generales</h2>
+
+            <div id="articulo-16" class="article">
+              <p class="article-number">Artículo 16</p>
+              <h3 class="article-title">
+                Modificación del reglamento
+                <a href="#articulo-16" class="article-anchor" aria-label="Enlace permanente al artículo 16">#</a>
+              </h3>
+              <p>El presente reglamento podrá sufrir modificaciones, previa votación debiendo contar con la mayoría de los votos, representado por <strong>dos tercios de los presentes</strong>, y aprobación de la Asamblea de Miembros, convocados en sesión extraordinaria, según las necesidades futuras que surjan.</p>
+
+              <div class="callout">
+                <p><strong>Proceso de modificación en GitHub.</strong> Los cambios propuestos se tramitan como <em>pull requests</em> en el repositorio <code style="font-family: var(--font-mono); font-size: 0.875rem;">handbook</code> sobre el archivo <code style="font-family: var(--font-mono); font-size: 0.875rem;">reglamento.md</code>. El PR queda abierto como mínimo 30 días para discusión antes de elevarse a Asamblea extraordinaria, donde se requiere el voto favorable de dos tercios de los presentes.</p>
+              </div>
+            </div>
+          </section>
+
+          <div class="reglamento-actions">
+            <a href="#main" class="btn btn-ghost">
+              Volver al inicio de la página
+              <span aria-hidden="true">↑</span>
+            </a>
+            <button type="button" class="btn btn-ghost" onclick="window.print();">
+              Imprimir o guardar como PDF
+            </button>
+            <a href="https://github.com/riisupa/handbook" class="btn btn-primary">
+              Ver en GitHub
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+
+        </article>
+      </div>
+    </div>
+
+  </main>
+
+  <div data-slot="footer"></div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/riisupa.js"></script>
+  <script>
+    RIISUPA_UI.mount('reglamento');
+
+    /* -----------------------------------------------------------------
+       Scroll-spy: resaltar en el TOC el artículo visible en pantalla
+       ----------------------------------------------------------------- */
+    (function () {
+      const articulos = document.querySelectorAll('.article, #fundamentacion');
+      const tocLinks = document.querySelectorAll('.reglamento-toc a');
+      const tocById = new Map();
+      tocLinks.forEach((a) => {
+        const id = a.getAttribute('href').slice(1);
+        if (id) tocById.set(id, a);
+      });
+
+      if (!('IntersectionObserver' in window)) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            const link = tocById.get(id);
+            if (link) {
+              tocLinks.forEach((a) => a.classList.remove('is-active'));
+              link.classList.add('is-active');
+            }
+          }
+        });
+      }, {
+        rootMargin: '-80px 0px -60% 0px',
+        threshold: 0,
+      });
+
+      articulos.forEach((a) => observer.observe(a));
+    })();
+
+    /* Scroll suave a anchor al cargar */
+    if (window.location.hash) {
+      setTimeout(() => {
+        const target = document.querySelector(window.location.hash);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 120);
+    }
+  </script>
+</body>
+</html>

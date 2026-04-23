@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="theme-color" content="#0C447C" />
+  <title>Proyectos de investigación · RIISUPA</title>
+  <meta name="description" content="Proyectos de investigación colaborativos avalados por RIISUPA. Filtrables por línea temática, tipo de estudio, universidad participante e investigador." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Proyectos de investigación · RIISUPA" />
+  <meta property="og:description" content="Proyectos colaborativos avalados por la Red, filtrables por línea temática, tipo de estudio, universidad participante e investigador." />
+  <meta property="og:locale" content="es_AR" />
+  <meta property="og:site_name" content="RIISUPA" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Proyectos de investigación · RIISUPA" />
+  <meta name="twitter:description" content="Proyectos colaborativos avalados por la Red, filtrables por línea temática, tipo de estudio, universidad participante e investigador." />
+
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" />
+  <link rel="stylesheet" href="assets/css/riisupa.css" />
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Saltar al contenido principal</a>
+
+  <div data-slot="header"></div>
+
+  <main id="main">
+
+    <header class="page-header">
+      <div class="container">
+        <p class="eyebrow">Investigación colaborativa</p>
+        <h1 class="display-lg text-balance">Proyectos de la Red</h1>
+        <p class="lead">
+          Investigaciones desarrolladas entre dos o más universidades miembro, avaladas por el Comité Ejecutivo conforme al <a href="reglamento.html#articulo-13">Art. 13 del Reglamento</a>. Cada proyecto vive como repositorio abierto en GitHub.
+        </p>
+      </div>
+    </header>
+
+    <section class="filters">
+      <div class="container">
+        <form id="filtros-proyectos" style="--filter-count: 5;" class="filters-inner" onsubmit="event.preventDefault();" role="search" aria-label="Filtrar proyectos">
+          <div class="filter-field">
+            <label for="busqueda">Buscar por título o palabra clave</label>
+            <input type="search" id="busqueda" name="busqueda" placeholder="Ej.: FHIR, cardiovascular, cohorte..." autocomplete="off" />
+          </div>
+          <div class="filter-field">
+            <label for="linea">Línea</label>
+            <select id="linea" name="linea">
+              <option value="">Todas</option>
+            </select>
+          </div>
+          <div class="filter-field">
+            <label for="tipoEstudio">Tipo de estudio</label>
+            <select id="tipoEstudio" name="tipoEstudio">
+              <option value="">Todos</option>
+            </select>
+          </div>
+          <div class="filter-field">
+            <label for="estado">Estado</label>
+            <select id="estado" name="estado">
+              <option value="">Todos</option>
+            </select>
+          </div>
+          <div class="filter-field">
+            <label for="universidad">Universidad</label>
+            <select id="universidad" name="universidad">
+              <option value="">Todas</option>
+            </select>
+          </div>
+          <div class="filter-field">
+            <label for="investigador">Investigador/a</label>
+            <select id="investigador" name="investigador">
+              <option value="">Todos</option>
+            </select>
+          </div>
+          <button type="button" id="reset-filtros" class="filter-reset">Limpiar</button>
+        </form>
+        <div style="padding-top: 0.75rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; font-size: 0.875rem;">
+          <label style="display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+            <input type="checkbox" id="solo-fhir" />
+            <span>Solo proyectos con FHIR R4</span>
+          </label>
+          <label style="display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+            <input type="checkbox" id="solo-activos" />
+            <span>Solo proyectos activos (avalados o en ejecución)</span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 2rem;">
+      <div class="container">
+        <p class="results-meta" id="resultados-meta">—</p>
+        <div class="grid" id="resultados" style="grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <div data-slot="footer"></div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/riisupa.js"></script>
+  <script>
+    RIISUPA_UI.mount('proyectos');
+
+    /* Populate selects */
+    const lineaSelect = document.getElementById('linea');
+    RIISUPA.lineas.filter(l => l.activa).forEach(l => {
+      const opt = document.createElement('option');
+      opt.value = l.id;
+      opt.textContent = l.nombre;
+      lineaSelect.appendChild(opt);
+    });
+
+    const tipoSelect = document.getElementById('tipoEstudio');
+    const tiposUsados = [...new Set(RIISUPA.proyectos.map(p => p.tipoEstudio))];
+    tiposUsados.forEach(t => {
+      const opt = document.createElement('option');
+      opt.value = t;
+      opt.textContent = RIISUPA.tipoEstudioLabels[t] || t;
+      tipoSelect.appendChild(opt);
+    });
+
+    const estadoSelect = document.getElementById('estado');
+    const estadosUsados = [...new Set(RIISUPA.proyectos.map(p => p.estado))];
+    estadosUsados.forEach(e => {
+      const opt = document.createElement('option');
+      opt.value = e;
+      opt.textContent = RIISUPA.estadoLabels[e] || e;
+      estadoSelect.appendChild(opt);
+    });
+
+    const uniSelect = document.getElementById('universidad');
+    [...RIISUPA.universidades].sort((a, b) => a.sigla.localeCompare(b.sigla)).forEach(u => {
+      const opt = document.createElement('option');
+      opt.value = u.id;
+      opt.textContent = u.sigla;
+      uniSelect.appendChild(opt);
+    });
+
+    const invSelect = document.getElementById('investigador');
+    [...RIISUPA.investigadores]
+      .filter(i => i.activo)
+      .sort((a, b) => a.apellido.localeCompare(b.apellido))
+      .forEach(i => {
+        const opt = document.createElement('option');
+        opt.value = i.id;
+        opt.textContent = i.apellido + ', ' + i.nombre;
+        invSelect.appendChild(opt);
+      });
+
+    /* Card render */
+    function renderProyecto(p) {
+      const lider = RIISUPA.helpers.getUniversidad(p.universidadLider);
+      const linea = RIISUPA.helpers.getLinea(p.linea);
+      const ip = RIISUPA.helpers.getInvestigador(p.investigadorPrincipal);
+      const estadoLabel = RIISUPA.estadoLabels[p.estado];
+      const tipoLabel = RIISUPA.tipoEstudioLabels[p.tipoEstudio] || p.tipoEstudio;
+      let estadoTag = 'tag';
+      if (['avalado', 'en-ejecucion'].includes(p.estado)) estadoTag = 'tag tag-accent';
+      else if (['en-evaluacion', 'propuesta'].includes(p.estado)) estadoTag = 'tag tag-primary';
+
+      const universidadesLabels = p.universidadesParticipantes
+        .map(id => RIISUPA.helpers.getUniversidad(id))
+        .filter(Boolean)
+        .map(u => RIISUPA.helpers.escapeHTML(u.sigla))
+        .join(' · ');
+
+      const palabras = p.palabrasClave
+        .slice(0, 5)
+        .map(k => `<span class="tag">${RIISUPA.helpers.escapeHTML(k)}</span>`)
+        .join('');
+
+      return `
+        <article class="card" id="${p.id}">
+          <div class="card-head" style="flex-direction: row;">
+            <div style="display: flex; gap: 0.375rem; flex-wrap: wrap;">
+              <span class="${estadoTag}">${estadoLabel}</span>
+              ${p.usaFHIR ? '<span class="tag tag-accent">FHIR R4</span>' : ''}
+            </div>
+            <span class="metadata">${p.universidadesParticipantes.length} U.</span>
+          </div>
+
+          <h3 class="card-title" style="margin-top: 1rem;">${RIISUPA.helpers.escapeHTML(p.titulo)}</h3>
+          <p class="card-description" style="-webkit-line-clamp: 4;">${RIISUPA.helpers.escapeHTML(p.resumen)}</p>
+
+          <dl class="card-meta">
+            <div>
+              <dt>Línea</dt>
+              <dd>${RIISUPA.helpers.escapeHTML(linea.nombre)}</dd>
+            </div>
+            <div>
+              <dt>Tipo de estudio</dt>
+              <dd>${RIISUPA.helpers.escapeHTML(tipoLabel)}</dd>
+            </div>
+            <div>
+              <dt>U. líder</dt>
+              <dd>${RIISUPA.helpers.escapeHTML(lider.sigla)}</dd>
+            </div>
+            <div>
+              <dt>Duración</dt>
+              <dd>${p.duracionMeses} meses</dd>
+            </div>
+          </dl>
+
+          <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--rule);">
+            <p class="metadata">Investigador/a principal</p>
+            <p style="margin-top: 0.375rem; font-size: 0.9375rem; color: var(--ink-700);">
+              ${ip ? RIISUPA.helpers.escapeHTML(ip.nombre + ' ' + ip.apellido) : '—'}
+            </p>
+          </div>
+
+          <div style="margin-top: 0.75rem;">
+            <p class="metadata">Universidades participantes</p>
+            <p style="margin-top: 0.375rem; font-size: 0.8125rem; color: var(--ink-600); font-family: var(--font-mono);">
+              ${universidadesLabels}
+            </p>
+          </div>
+
+          ${palabras ? `<div class="card-tags">${palabras}</div>` : ''}
+        </article>
+      `;
+    }
+
+    /* Filter logic */
+    function filtrar(datos, state) {
+      const soloFhir = document.getElementById('solo-fhir').checked;
+      const soloActivos = document.getElementById('solo-activos').checked;
+      return datos.filter(p => {
+        if (state.busqueda) {
+          const q = RIISUPA.helpers.normalize(state.busqueda);
+          const hay = RIISUPA.helpers.normalize(
+            p.titulo + ' ' + p.resumen + ' ' + p.palabrasClave.join(' ')
+          );
+          if (!hay.includes(q)) return false;
+        }
+        if (state.linea && p.linea !== state.linea) return false;
+        if (state.tipoEstudio && p.tipoEstudio !== state.tipoEstudio) return false;
+        if (state.estado && p.estado !== state.estado) return false;
+        if (state.universidad && !p.universidadesParticipantes.includes(state.universidad)) return false;
+        if (state.investigador && p.investigadorPrincipal !== state.investigador) return false;
+        if (soloFhir && !p.usaFHIR) return false;
+        if (soloActivos && !['avalado', 'en-ejecucion'].includes(p.estado)) return false;
+        return true;
+      });
+    }
+
+    RIISUPA_UI.initFiltros({
+      filtrosId: 'filtros-proyectos',
+      resultadosId: 'resultados',
+      metaId: 'resultados-meta',
+      resetId: 'reset-filtros',
+      datos: [...RIISUPA.proyectos].sort((a, b) => b.fechaInicio.localeCompare(a.fechaInicio)),
+      filtrar,
+      render: renderProyecto,
+      etiquetaResultado: 'proyectos',
+    });
+
+    /* Extra checkboxes trigger re-render */
+    document.getElementById('solo-fhir').addEventListener('change', () => {
+      document.querySelector('#filtros-proyectos input[type="search"]').dispatchEvent(new Event('input'));
+    });
+    document.getElementById('solo-activos').addEventListener('change', () => {
+      document.querySelector('#filtros-proyectos input[type="search"]').dispatchEvent(new Event('input'));
+    });
+
+    document.getElementById('reset-filtros').addEventListener('click', () => {
+      document.getElementById('solo-fhir').checked = false;
+      document.getElementById('solo-activos').checked = false;
+    });
+
+    if (window.location.hash) {
+      setTimeout(() => {
+        const target = document.querySelector(window.location.hash);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
+  </script>
+</body>
+</html>

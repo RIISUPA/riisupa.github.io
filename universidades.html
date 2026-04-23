@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="theme-color" content="#0C447C" />
+  <title>Universidades miembro · RIISUPA</title>
+  <meta name="description" content="Listado completo de universidades de gestión privada de Argentina que integran RIISUPA, con información institucional y líneas de investigación." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Universidades miembro · RIISUPA" />
+  <meta property="og:description" content="Universidades de gestión privada de Argentina que integran RIISUPA. 18 instituciones con trayectoria en investigación en salud." />
+  <meta property="og:locale" content="es_AR" />
+  <meta property="og:site_name" content="RIISUPA" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Universidades miembro · RIISUPA" />
+  <meta name="twitter:description" content="Universidades de gestión privada de Argentina que integran RIISUPA. 18 instituciones con trayectoria en investigación en salud." />
+
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" />
+  <link rel="stylesheet" href="assets/css/riisupa.css" />
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Saltar al contenido principal</a>
+
+  <div data-slot="header"></div>
+
+  <main id="main">
+
+    <header class="page-header">
+      <div class="container">
+        <p class="eyebrow">Integrantes</p>
+        <h1 class="display-lg text-balance">Universidades miembro</h1>
+        <p class="lead">
+          <span id="total-universidades">—</span> instituciones de gestión privada, miembros del CRUP, integran activamente la Red. Todas cuentan con trayectoria demostrable en investigación en salud y participan en pie de igualdad conforme al <a href="reglamento.html#articulo-7">Art. 7 del Reglamento</a>.
+        </p>
+      </div>
+    </header>
+
+    <section class="filters">
+      <div class="container">
+        <form id="filtros-universidades" style="--filter-count: 2;" class="filters-inner" onsubmit="event.preventDefault();" role="search" aria-label="Filtrar universidades">
+          <div class="filter-field">
+            <label for="busqueda">Buscar por nombre o sigla</label>
+            <input type="search" id="busqueda" name="busqueda" placeholder="Ej.: Austral, ITBA, Favaloro..." autocomplete="off" />
+          </div>
+          <div class="filter-field">
+            <label for="provincia">Provincia</label>
+            <select id="provincia" name="provincia">
+              <option value="">Todas las provincias</option>
+            </select>
+          </div>
+          <div class="filter-field">
+            <label for="linea">Línea de investigación</label>
+            <select id="linea" name="linea">
+              <option value="">Todas las líneas</option>
+            </select>
+          </div>
+          <button type="button" id="reset-filtros" class="filter-reset">Limpiar</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 2rem; border-bottom: 0;">
+      <div class="container">
+        <p class="results-meta" id="resultados-meta">—</p>
+        <div class="grid" id="resultados" style="grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">Distribución geográfica</p>
+        <h2 class="display-md" style="margin-top: 0.75rem;">Presencia federal</h2>
+        <div id="por-provincia" style="margin-top: 2.5rem; display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <div data-slot="footer"></div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/riisupa.js"></script>
+  <script>
+    RIISUPA_UI.mount('universidades');
+
+    const activas = RIISUPA.universidades.filter(u => u.activa);
+    document.getElementById('total-universidades').textContent = activas.length;
+
+    /* Populate filter dropdowns */
+    const provincias = [...new Set(activas.map(u => u.provincia))].sort((a, b) => a.localeCompare(b));
+    const provinciaSelect = document.getElementById('provincia');
+    provincias.forEach(p => {
+      const opt = document.createElement('option');
+      opt.value = p;
+      opt.textContent = p;
+      provinciaSelect.appendChild(opt);
+    });
+
+    const lineaSelect = document.getElementById('linea');
+    RIISUPA.lineas.filter(l => l.activa).forEach(l => {
+      const opt = document.createElement('option');
+      opt.value = l.id;
+      opt.textContent = l.nombre;
+      lineaSelect.appendChild(opt);
+    });
+
+    /* Card render */
+    function renderUniversidad(u) {
+      const lineasLabels = u.lineas
+        .map(id => RIISUPA.helpers.getLinea(id))
+        .filter(Boolean)
+        .slice(0, 3)
+        .map(l => `<span class="tag">${RIISUPA.helpers.escapeHTML(l.nombre)}</span>`)
+        .join('');
+      const nProyectos = RIISUPA.proyectos.filter(p => p.universidadesParticipantes.includes(u.id)).length;
+      const nInvestigadores = RIISUPA.investigadores.filter(i => i.universidades.includes(u.id)).length;
+      const anio = u.fundacion ? `<small>${u.fundacion}</small>` : '';
+      return `
+        <article class="card" id="${u.id}">
+          <div class="card-head">
+            <div style="flex: 1;">
+              <p class="eyebrow" style="color: var(--primary-600);">${RIISUPA.helpers.escapeHTML(u.sigla)} ${anio}</p>
+              <h3 class="card-title"><a href="#${u.id}" style="text-decoration: none; color: inherit;">${RIISUPA.helpers.escapeHTML(u.nombre)}</a></h3>
+              <p class="metadata" style="margin-top: 0.5rem;">${RIISUPA.helpers.escapeHTML(u.ciudad)}, ${RIISUPA.helpers.escapeHTML(u.provincia)}</p>
+            </div>
+          </div>
+          <p class="card-description" style="-webkit-line-clamp: 4;">${RIISUPA.helpers.escapeHTML(u.descripcion)}</p>
+          <dl class="card-meta">
+            <div>
+              <dt>Proyectos en la Red</dt>
+              <dd>${nProyectos}</dd>
+            </div>
+            <div>
+              <dt>Investigadores</dt>
+              <dd>${nInvestigadores}</dd>
+            </div>
+          </dl>
+          ${lineasLabels ? `<div class="card-tags">${lineasLabels}</div>` : ''}
+          <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+            <a href="${u.sitioWeb}" target="_blank" rel="noopener" style="font-size: 0.8125rem;">Sitio web ↗</a>
+            <span class="metadata">${RIISUPA.helpers.escapeHTML(u.representanteTitular.nombre)}</span>
+          </div>
+        </article>
+      `;
+    }
+
+    /* Filter logic */
+    function filtrar(datos, state) {
+      return datos.filter(u => {
+        if (state.busqueda) {
+          const q = RIISUPA.helpers.normalize(state.busqueda);
+          const hay = RIISUPA.helpers.normalize(u.nombre + ' ' + u.sigla + ' ' + u.ciudad + ' ' + u.provincia);
+          if (!hay.includes(q)) return false;
+        }
+        if (state.provincia && u.provincia !== state.provincia) return false;
+        if (state.linea && !u.lineas.includes(state.linea)) return false;
+        return true;
+      });
+    }
+
+    RIISUPA_UI.initFiltros({
+      filtrosId: 'filtros-universidades',
+      resultadosId: 'resultados',
+      metaId: 'resultados-meta',
+      resetId: 'reset-filtros',
+      datos: activas,
+      filtrar,
+      render: renderUniversidad,
+      etiquetaResultado: 'universidades',
+    });
+
+    /* Distribución por provincia */
+    const porProvincia = activas.reduce((acc, u) => {
+      (acc[u.provincia] = acc[u.provincia] || []).push(u);
+      return acc;
+    }, {});
+    const sorted = Object.entries(porProvincia).sort(([a], [b]) => a.localeCompare(b));
+    document.getElementById('por-provincia').innerHTML = sorted.map(([prov, unis]) => `
+      <div style="border-top: 1px solid var(--ink-200); padding-top: 1rem;">
+        <p class="metadata">${RIISUPA.helpers.escapeHTML(prov)} · ${unis.length}</p>
+        <ul style="margin: 0.75rem 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0.375rem;">
+          ${unis.map(u => `<li style="font-size: 0.875rem;"><a href="#${u.id}" style="text-decoration: none; color: var(--ink-700);">${RIISUPA.helpers.escapeHTML(u.nombre)}</a></li>`).join('')}
+        </ul>
+      </div>
+    `).join('');
+
+    /* Scroll to anchor on load */
+    if (window.location.hash) {
+      setTimeout(() => {
+        const target = document.querySelector(window.location.hash);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
+  </script>
+</body>
+</html>

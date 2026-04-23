@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="theme-color" content="#0C447C" />
+  <title>Blog y novedades · RIISUPA</title>
+  <meta name="description" content="Noticias, editoriales, reportes de proyectos, entrevistas y recursos de la Red de Investigación e Innovación en Salud de Universidades de gestión Privada de Argentina." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Blog y novedades · RIISUPA" />
+  <meta property="og:description" content="Noticias, editoriales, reportes de proyectos y recursos de la Red de Investigación e Innovación en Salud de Universidades Privadas argentinas." />
+  <meta property="og:locale" content="es_AR" />
+  <meta property="og:site_name" content="RIISUPA" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Blog y novedades · RIISUPA" />
+  <meta name="twitter:description" content="Noticias, editoriales, reportes de proyectos y recursos de la Red de Investigación e Innovación en Salud de Universidades Privadas argentinas." />
+
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" />
+  <link rel="stylesheet" href="assets/css/riisupa.css" />
+
+  <style>
+    .post-feature {
+      grid-column: 1 / -1;
+      background: white;
+      border: 1px solid var(--rule);
+      padding: 2rem;
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: 1fr;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 180ms ease;
+    }
+
+    .post-feature:hover {
+      border-color: var(--primary-400);
+      color: inherit;
+    }
+
+    @media (min-width: 768px) {
+      .post-feature {
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+        padding: 2.5rem;
+      }
+    }
+
+    .post-feature-meta {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .post-feature h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      font-weight: 500;
+      margin: 0 0 1rem;
+      color: var(--ink-900);
+    }
+
+    .post-feature p {
+      font-family: var(--font-serif);
+      font-size: 1.125rem;
+      line-height: 1.5;
+      color: var(--ink-700);
+    }
+
+    .post-feature-side {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 1rem;
+    }
+
+    .post-card {
+      background: white;
+      border: 1px solid var(--rule);
+      padding: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 180ms ease;
+    }
+
+    .post-card:hover {
+      border-color: var(--primary-400);
+      color: inherit;
+    }
+
+    .post-card-meta {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .post-card h3 {
+      font-family: var(--font-serif);
+      font-size: 1.1875rem;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      font-weight: 500;
+      color: var(--ink-900);
+      margin: 0 0 0.75rem;
+    }
+
+    .post-card-bajada {
+      font-size: 0.9375rem;
+      line-height: 1.55;
+      color: var(--ink-600);
+      margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .post-card-footer {
+      margin-top: auto;
+      padding-top: 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .post-date {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink-500);
+    }
+
+    .read-time {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: var(--ink-500);
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Saltar al contenido principal</a>
+
+  <div data-slot="header"></div>
+
+  <main id="main">
+
+    <header class="page-header">
+      <div class="container">
+        <p class="eyebrow">Publicaciones editoriales</p>
+        <h1 class="display-lg text-balance">Blog y novedades</h1>
+        <p class="lead">
+          Noticias institucionales, editoriales, reportes de proyectos, entrevistas a investigadores y recursos compartidos por la Red. Todos los contenidos se publican bajo licencia CC BY 4.0.
+        </p>
+      </div>
+    </header>
+
+    <section class="filters">
+      <div class="container">
+        <form id="filtros-blog" style="--filter-count: 2;" class="filters-inner" onsubmit="event.preventDefault();" role="search" aria-label="Filtrar posts">
+          <div class="filter-field">
+            <label for="busqueda">Buscar por título, palabra clave o autor/a</label>
+            <input type="search" id="busqueda" name="busqueda" placeholder="Ej.: FHIR, cohorte, pospandemia..." autocomplete="off" />
+          </div>
+          <div class="filter-field">
+            <label for="tipo">Tipo de contenido</label>
+            <select id="tipo" name="tipo">
+              <option value="">Todos</option>
+            </select>
+          </div>
+          <div class="filter-field">
+            <label for="linea">Línea</label>
+            <select id="linea" name="linea">
+              <option value="">Todas</option>
+            </select>
+          </div>
+          <button type="button" id="reset-filtros" class="filter-reset">Limpiar</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 2rem;">
+      <div class="container">
+        <p class="results-meta" id="resultados-meta">—</p>
+        <div class="grid" id="resultados" style="grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));"></div>
+      </div>
+    </section>
+
+    <section class="section" style="background: var(--surface-muted); border-bottom: 0;">
+      <div class="container-narrow">
+        <p class="eyebrow">Escribir para el blog</p>
+        <h2 class="display-md" style="margin-top: 0.75rem;">¿Querés proponer una nota?</h2>
+        <p style="margin-top: 1.5rem; font-size: 1.0625rem; line-height: 1.7; color: var(--ink-700);">
+          Las propuestas editoriales se tramitan como issues en el repositorio del sitio. El equipo editorial revisa, acompaña el proceso y define fecha de publicación. Podés proponer una noticia institucional, una editorial de opinión, un reporte de avances de tu proyecto, una entrevista o un recurso para la comunidad.
+        </p>
+        <div style="margin-top: 2rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <a href="https://github.com/riisupa/riisupa.org.ar/issues/new?template=propuesta-post.yml" class="btn btn-primary">
+            Abrir issue en GitHub
+            <span aria-hidden="true">↗</span>
+          </a>
+          <a href="https://github.com/riisupa/riisupa.org.ar" class="btn btn-ghost">
+            Ver el repositorio
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div data-slot="footer"></div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/riisupa.js"></script>
+  <script>
+    RIISUPA_UI.mount('blog');
+
+    const posts = [...RIISUPA.posts].sort((a, b) => b.fechaPublicacion.localeCompare(a.fechaPublicacion));
+
+    /* Selects */
+    const tipoSelect = document.getElementById('tipo');
+    const tiposUsados = [...new Set(posts.map(p => p.tipo))];
+    tiposUsados.forEach(t => {
+      const opt = document.createElement('option');
+      opt.value = t;
+      opt.textContent = RIISUPA.tipoPostLabels[t] || t;
+      tipoSelect.appendChild(opt);
+    });
+
+    const lineaSelect = document.getElementById('linea');
+    RIISUPA.lineas.filter(l => l.activa).forEach(l => {
+      const opt = document.createElement('option');
+      opt.value = l.id;
+      opt.textContent = l.nombre;
+      lineaSelect.appendChild(opt);
+    });
+
+    /* Separar destacados del resto */
+    const destacados = posts.filter(p => p.destacado);
+    const otros = posts.filter(p => !p.destacado);
+
+    function renderAutores(post) {
+      const internos = post.autores
+        .map(id => RIISUPA.helpers.getInvestigador(id))
+        .filter(Boolean)
+        .map(i => RIISUPA.helpers.escapeHTML(i.nombre + ' ' + i.apellido));
+      const externos = (post.autoresExternos || []).map(a => RIISUPA.helpers.escapeHTML(a.nombre));
+      const todos = [...internos, ...externos];
+      if (todos.length === 0) return 'RIISUPA';
+      if (todos.length === 1) return todos[0];
+      if (todos.length === 2) return todos.join(' + ');
+      return todos[0] + ' y ' + (todos.length - 1) + ' más';
+    }
+
+    /* Render */
+    function renderFeature(post) {
+      const linea = post.linea ? RIISUPA.helpers.getLinea(post.linea) : null;
+      return `
+        <a href="#${post.id}" class="post-feature">
+          <div>
+            <div class="post-feature-meta">
+              <span class="tag tag-accent">Destacado</span>
+              <span class="tag">${RIISUPA.tipoPostLabels[post.tipo]}</span>
+              ${linea ? `<span class="tag tag-primary">${RIISUPA.helpers.escapeHTML(linea.nombre)}</span>` : ''}
+            </div>
+            <h2>${RIISUPA.helpers.escapeHTML(post.titulo)}</h2>
+            <p>${RIISUPA.helpers.escapeHTML(post.bajada)}</p>
+          </div>
+          <div class="post-feature-side">
+            <div>
+              <p class="metadata" style="margin-bottom: 0.375rem;">Publicado</p>
+              <p style="font-family: var(--font-serif); font-size: 1.125rem; color: var(--ink-800);">${RIISUPA_UI.formatoFechaLarga(post.fechaPublicacion)}</p>
+            </div>
+            <div>
+              <p class="metadata" style="margin-bottom: 0.375rem;">Autoría</p>
+              <p style="font-size: 0.9375rem; color: var(--ink-700);">${renderAutores(post)}</p>
+            </div>
+            <div>
+              <p class="metadata">${post.tiempoLectura} min de lectura</p>
+            </div>
+          </div>
+        </a>
+      `;
+    }
+
+    function renderCard(post) {
+      const linea = post.linea ? RIISUPA.helpers.getLinea(post.linea) : null;
+      return `
+        <a href="#${post.id}" class="post-card" id="${post.id}">
+          <div class="post-card-meta">
+            <span class="tag">${RIISUPA.tipoPostLabels[post.tipo]}</span>
+            ${linea ? `<span class="tag tag-primary">${RIISUPA.helpers.escapeHTML(linea.nombre)}</span>` : ''}
+          </div>
+          <h3>${RIISUPA.helpers.escapeHTML(post.titulo)}</h3>
+          <p class="post-card-bajada">${RIISUPA.helpers.escapeHTML(post.bajada)}</p>
+          <div class="post-card-footer">
+            <span class="post-date">${RIISUPA_UI.formatoFechaCorta(post.fechaPublicacion)}</span>
+            <span class="read-time">${post.tiempoLectura} min</span>
+          </div>
+        </a>
+      `;
+    }
+
+    /* Filter logic */
+    function filtrar(datos, state) {
+      return datos.filter(p => {
+        if (state.busqueda) {
+          const q = RIISUPA.helpers.normalize(state.busqueda);
+          const autoresNombres = p.autores.map(id => {
+            const i = RIISUPA.helpers.getInvestigador(id);
+            return i ? (i.nombre + ' ' + i.apellido) : '';
+          }).join(' ');
+          const hay = RIISUPA.helpers.normalize(
+            p.titulo + ' ' + p.bajada + ' ' + p.tags.join(' ') + ' ' + autoresNombres
+          );
+          if (!hay.includes(q)) return false;
+        }
+        if (state.tipo && p.tipo !== state.tipo) return false;
+        if (state.linea && p.linea !== state.linea) return false;
+        return true;
+      });
+    }
+
+    /* Render con feature + grid */
+    function renderAll(filtrados) {
+      const destacadosFiltrados = filtrados.filter(p => p.destacado);
+      const otrosFiltrados = filtrados.filter(p => !p.destacado);
+      const contenedor = document.getElementById('resultados');
+
+      let html = '';
+      if (destacadosFiltrados.length > 0) {
+        html += renderFeature(destacadosFiltrados[0]);
+      }
+      destacadosFiltrados.slice(1).forEach(p => { html += renderCard(p); });
+      otrosFiltrados.forEach(p => { html += renderCard(p); });
+
+      contenedor.innerHTML = html || '<div class="empty-state" style="grid-column: 1 / -1;"><p>No hay posts que coincidan con los filtros.</p></div>';
+
+      const metaEl = document.getElementById('resultados-meta');
+      if (metaEl) metaEl.innerHTML = `<strong>${filtrados.length}</strong> de ${posts.length} publicaciones`;
+    }
+
+    /* Hook inicial */
+    const selects = document.querySelectorAll('#filtros-blog select, #filtros-blog input[type="search"]');
+    function aplicar() {
+      const state = {};
+      selects.forEach(el => { state[el.name] = el.value; });
+      renderAll(filtrar(posts, state));
+    }
+    selects.forEach(el => el.addEventListener('input', aplicar));
+    document.getElementById('reset-filtros').addEventListener('click', () => {
+      selects.forEach(el => { el.value = ''; });
+      aplicar();
+    });
+    aplicar();
+
+    if (window.location.hash) {
+      setTimeout(() => {
+        const target = document.querySelector(window.location.hash);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
+  </script>
+</body>
+</html>

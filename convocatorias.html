@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="theme-color" content="#0C447C" />
+  <title>Convocatorias · RIISUPA</title>
+  <meta name="description" content="Convocatorias a proyectos, becas, movilidad y financiamiento. Nacionales, internacionales e iberoamericanas, con foco en salud e investigación colaborativa." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Convocatorias · RIISUPA" />
+  <meta property="og:description" content="Convocatorias abiertas a proyectos, becas y movilidad en investigación en salud. Oportunidades nacionales, iberoamericanas e internacionales." />
+  <meta property="og:locale" content="es_AR" />
+  <meta property="og:site_name" content="RIISUPA" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Convocatorias · RIISUPA" />
+  <meta name="twitter:description" content="Convocatorias abiertas a proyectos, becas y movilidad en investigación en salud. Oportunidades nacionales, iberoamericanas e internacionales." />
+
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" />
+  <link rel="stylesheet" href="assets/css/riisupa.css" />
+
+  <style>
+    .conv-card {
+      background: white;
+      border: 1px solid var(--rule);
+      padding: 1.75rem;
+      display: grid;
+      gap: 1.25rem;
+      grid-template-columns: 1fr;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 180ms ease;
+    }
+
+    @media (min-width: 768px) {
+      .conv-card {
+        grid-template-columns: 1fr 240px;
+        gap: 2rem;
+      }
+    }
+
+    .conv-card:hover {
+      border-color: var(--primary-400);
+      color: inherit;
+    }
+
+    .conv-card.prioritaria {
+      border-left: 3px solid var(--accent-600);
+    }
+
+    .conv-header {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .conv-titulo {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--ink-900);
+      font-weight: 500;
+      margin: 0 0 0.5rem;
+    }
+
+    .conv-organismo {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ink-600);
+      margin: 0 0 1rem;
+    }
+
+    .conv-descripcion {
+      font-size: 0.9375rem;
+      line-height: 1.55;
+      color: var(--ink-700);
+      margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .conv-aside {
+      background: var(--surface-muted);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .conv-aside-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .conv-aside-block dt {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink-500);
+      margin: 0;
+    }
+
+    .conv-aside-block dd {
+      margin: 0;
+      font-family: var(--font-serif);
+      font-size: 1.0625rem;
+      color: var(--ink-800);
+      line-height: 1.2;
+    }
+
+    .conv-deadline {
+      background: var(--accent-50);
+      padding: 0.625rem 0.875rem;
+      margin: 0;
+    }
+
+    .conv-deadline.urgente {
+      background: var(--amber-50);
+    }
+
+    .conv-deadline.vencido {
+      background: var(--surface-muted);
+    }
+
+    .conv-deadline-dias {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent-800);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .conv-deadline.urgente .conv-deadline-dias {
+      color: var(--amber-800);
+    }
+
+    .conv-deadline.vencido .conv-deadline-dias {
+      color: var(--ink-500);
+    }
+
+    .conv-meta {
+      margin-top: 1rem;
+      padding-top: 0.875rem;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .conv-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ink-500);
+    }
+
+    .conv-meta-link {
+      margin-left: auto;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--primary-800);
+      text-decoration: none;
+    }
+
+    .section-divider-conv {
+      margin: 3rem 0 2rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--ink-200);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .section-divider-conv h2 {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+
+    .prioritaria-badge {
+      background: var(--accent-600);
+      color: white;
+      padding: 0.125rem 0.625rem;
+      font-family: var(--font-mono);
+      font-size: 0.625rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 500;
+      border-radius: 999px;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Saltar al contenido principal</a>
+
+  <div data-slot="header"></div>
+
+  <main id="main">
+
+    <header class="page-header">
+      <div class="container">
+        <p class="eyebrow">Financiamiento y oportunidades</p>
+        <h1 class="display-lg text-balance">Convocatorias</h1>
+        <p class="lead">
+          Convocatorias vigentes a proyectos, becas, movilidad y subsidios de interés para la Red. Incluye convocatorias internas de RIISUPA y externas nacionales, iberoamericanas e internacionales pertinentes para la investigación en salud.
+        </p>
+      </div>
+    </header>
+
+    <section class="filters">
+      <div class="container">
+        <form id="filtros-conv" style="--filter-count: 4;" class="filters-inner" onsubmit="event.preventDefault();" role="search" aria-label="Filtrar convocatorias">
+          <div class="filter-field">
+            <label for="busqueda">Buscar por título u organismo</label>
+            <input type="search" id="busqueda" name="busqueda" placeholder="Ej.: ANPCyT, becas, FHIR..." autocomplete="off" />
+          </div>
+          <div class="filter-field">
+            <label for="tipo">Tipo</label>
+            <select id="tipo" name="tipo">
+              <option value="">Todos</option>
+            </select>
+          </div>
+          <div class="filter-field">
+            <label for="ambito">Ámbito</label>
+            <select id="ambito" name="ambito">
+              <option value="">Todos</option>
+            </select>
+          </div>
+          <div class="filter-field">
+            <label for="estado">Estado</label>
+            <select id="estado" name="estado">
+              <option value="">Todos</option>
+            </select>
+          </div>
+          <div class="filter-field">
+            <label for="linea">Línea</label>
+            <select id="linea" name="linea">
+              <option value="">Todas</option>
+            </select>
+          </div>
+          <button type="button" id="reset-filtros" class="filter-reset">Limpiar</button>
+        </form>
+        <div style="padding-top: 0.75rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; font-size: 0.875rem;">
+          <label style="display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+            <input type="checkbox" id="solo-prioritarias" />
+            <span>Solo prioritarias para la Red</span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 2rem; border-bottom: 0;">
+      <div class="container">
+        <p class="results-meta" id="resultados-meta">—</p>
+
+        <div id="seccion-abiertas">
+          <div class="section-divider-conv">
+            <h2>Abiertas</h2>
+            <span class="metadata">Ordenadas por fecha de cierre</span>
+          </div>
+          <div id="resultados-abiertas" style="display: flex; flex-direction: column; gap: 1rem;"></div>
+        </div>
+
+        <div id="seccion-cerradas" style="margin-top: 4rem;">
+          <div class="section-divider-conv">
+            <h2>Cerradas y en evaluación</h2>
+            <span class="metadata">Archivo</span>
+          </div>
+          <div id="resultados-cerradas" style="display: flex; flex-direction: column; gap: 1rem;"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="background: var(--surface-muted); border-bottom: 0; margin-top: 4rem;">
+      <div class="container-narrow">
+        <p class="eyebrow">Proyectos colaborativos</p>
+        <h2 class="display-md" style="margin-top: 0.75rem;">¿Cómo postular con aval de RIISUPA?</h2>
+        <p style="margin-top: 1.5rem; font-size: 1.0625rem; line-height: 1.7; color: var(--ink-700);">
+          Los proyectos que se postulan a convocatorias externas requiriendo pertenencia a la Red deben ser avalados previamente por el Comité Ejecutivo según el <a href="reglamento.html#articulo-13">Art. 13 del Reglamento</a>. Para iniciar el trámite, abrí un issue en el repositorio <code style="font-family: var(--font-mono); font-size: 0.9375rem;">proposals</code> con la plantilla de propuesta de proyecto.
+        </p>
+        <div style="margin-top: 2rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <a href="https://github.com/riisupa/proposals/issues/new?template=propuesta-proyecto.yml" class="btn btn-primary">
+            Solicitar aval institucional
+            <span aria-hidden="true">↗</span>
+          </a>
+          <a href="proyectos.html" class="btn btn-ghost">
+            Ver proyectos actuales
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div data-slot="footer"></div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/riisupa.js"></script>
+  <script>
+    RIISUPA_UI.mount('convocatorias');
+
+    const convocatorias = [...RIISUPA.convocatorias];
+
+    /* Selects */
+    const tipoSelect = document.getElementById('tipo');
+    [...new Set(convocatorias.map(c => c.tipo))].forEach(t => {
+      const opt = document.createElement('option');
+      opt.value = t;
+      opt.textContent = RIISUPA.tipoConvocatoriaLabels[t] || t;
+      tipoSelect.appendChild(opt);
+    });
+
+    const ambitoSelect = document.getElementById('ambito');
+    [...new Set(convocatorias.map(c => c.ambito))].forEach(a => {
+      const opt = document.createElement('option');
+      opt.value = a;
+      opt.textContent = RIISUPA.ambitoLabels[a] || a;
+      ambitoSelect.appendChild(opt);
+    });
+
+    const estadoSelect = document.getElementById('estado');
+    [...new Set(convocatorias.map(c => c.estado))].forEach(e => {
+      const opt = document.createElement('option');
+      opt.value = e;
+      opt.textContent = RIISUPA.estadoConvocatoriaLabels[e] || e;
+      estadoSelect.appendChild(opt);
+    });
+
+    const lineaSelect = document.getElementById('linea');
+    RIISUPA.lineas.filter(l => l.activa).forEach(l => {
+      const opt = document.createElement('option');
+      opt.value = l.id;
+      opt.textContent = l.nombre;
+      lineaSelect.appendChild(opt);
+    });
+
+    /* Render */
+    function formatoMonto(monto, moneda) {
+      if (!monto) return '—';
+      return new Intl.NumberFormat('es-AR', {
+        style: 'currency',
+        currency: moneda,
+        maximumFractionDigits: 0,
+      }).format(monto);
+    }
+
+    function renderConvocatoria(c) {
+      const diasRestantes = RIISUPA_UI.diasHasta(c.fechaCierre);
+      const esAbierta = c.estado === 'abierta' && diasRestantes >= 0;
+
+      let deadlineClass = '';
+      let deadlineText = '';
+      if (diasRestantes < 0) {
+        deadlineClass = 'vencido';
+        deadlineText = 'Cerrada';
+      } else if (diasRestantes === 0) {
+        deadlineClass = 'urgente';
+        deadlineText = 'Cierra hoy';
+      } else if (diasRestantes === 1) {
+        deadlineClass = 'urgente';
+        deadlineText = 'Cierra mañana';
+      } else if (diasRestantes <= 14) {
+        deadlineClass = 'urgente';
+        deadlineText = `Cierra en ${diasRestantes} días`;
+      } else {
+        deadlineText = `Cierra en ${diasRestantes} días`;
+      }
+
+      const ambitoTag = c.ambito === 'internacional' || c.ambito === 'iberoamericano' ? 'tag tag-primary' : 'tag';
+
+      return `
+        <article class="conv-card ${c.prioritariaParaRed ? 'prioritaria' : ''}" id="${c.id}">
+          <div>
+            <div class="conv-header">
+              <span class="tag tag-primary">${RIISUPA.tipoConvocatoriaLabels[c.tipo]}</span>
+              <span class="${ambitoTag}">${RIISUPA.ambitoLabels[c.ambito]}</span>
+              ${c.prioritariaParaRed ? '<span class="prioritaria-badge">Prioritaria</span>' : ''}
+              <span class="tag">${RIISUPA.estadoConvocatoriaLabels[c.estado]}</span>
+            </div>
+            <h3 class="conv-titulo">${RIISUPA.helpers.escapeHTML(c.titulo)}</h3>
+            <p class="conv-organismo">${RIISUPA.helpers.escapeHTML(c.organismo)}</p>
+            <p class="conv-descripcion">${RIISUPA.helpers.escapeHTML(c.descripcion)}</p>
+
+            <div class="conv-meta">
+              <span class="conv-meta-item">Apertura: ${RIISUPA_UI.formatoFechaCorta(c.fechaApertura)}</span>
+              <span class="conv-meta-item">Cierre: ${RIISUPA_UI.formatoFechaCorta(c.fechaCierre)}</span>
+              <a href="${c.linkOficial}" target="_blank" rel="noopener" class="conv-meta-link">Sitio oficial ↗</a>
+            </div>
+          </div>
+
+          <aside class="conv-aside">
+            <div class="conv-deadline ${deadlineClass}">
+              <p class="conv-deadline-dias">${deadlineText}</p>
+            </div>
+
+            ${c.montoMaximo ? `
+              <div class="conv-aside-block">
+                <dt>Monto máximo</dt>
+                <dd>${formatoMonto(c.montoMaximo, c.moneda)}</dd>
+              </div>
+            ` : ''}
+
+            ${c.duracionMaxima ? `
+              <div class="conv-aside-block">
+                <dt>Duración</dt>
+                <dd>${RIISUPA.helpers.escapeHTML(c.duracionMaxima)}</dd>
+              </div>
+            ` : ''}
+
+            <div class="conv-aside-block">
+              <dt>Fuente</dt>
+              <dd style="font-size: 0.875rem; font-family: var(--font-sans);">${RIISUPA.helpers.escapeHTML(c.fuente)}</dd>
+            </div>
+          </aside>
+        </article>
+      `;
+    }
+
+    function filtrar(datos, state) {
+      const soloPrior = document.getElementById('solo-prioritarias').checked;
+      return datos.filter(c => {
+        if (state.busqueda) {
+          const q = RIISUPA.helpers.normalize(state.busqueda);
+          const hay = RIISUPA.helpers.normalize(
+            c.titulo + ' ' + c.organismo + ' ' + c.fuente + ' ' + c.descripcion
+          );
+          if (!hay.includes(q)) return false;
+        }
+        if (state.tipo && c.tipo !== state.tipo) return false;
+        if (state.ambito && c.ambito !== state.ambito) return false;
+        if (state.estado && c.estado !== state.estado) return false;
+        if (state.linea && !c.lineas.includes(state.linea)) return false;
+        if (soloPrior && !c.prioritariaParaRed) return false;
+        return true;
+      });
+    }
+
+    function renderAll(filtrados) {
+      const abiertas = filtrados
+        .filter(c => c.estado === 'abierta' && RIISUPA_UI.diasHasta(c.fechaCierre) >= 0)
+        .sort((a, b) => new Date(a.fechaCierre) - new Date(b.fechaCierre));
+      const otras = filtrados
+        .filter(c => !(c.estado === 'abierta' && RIISUPA_UI.diasHasta(c.fechaCierre) >= 0))
+        .sort((a, b) => new Date(b.fechaCierre) - new Date(a.fechaCierre));
+
+      const abiertasEl = document.getElementById('resultados-abiertas');
+      const cerradasEl = document.getElementById('resultados-cerradas');
+      const seccionCerradas = document.getElementById('seccion-cerradas');
+
+      abiertasEl.innerHTML = abiertas.length
+        ? abiertas.map(renderConvocatoria).join('')
+        : '<p style="padding: 2rem; text-align: center; color: var(--ink-500); font-family: var(--font-serif); font-size: 1.0625rem; background: white; border: 1px dashed var(--ink-200);">Sin convocatorias abiertas que coincidan con los filtros.</p>';
+
+      cerradasEl.innerHTML = otras.length
+        ? otras.map(renderConvocatoria).join('')
+        : '<p style="padding: 2rem; text-align: center; color: var(--ink-500); font-family: var(--font-serif); font-size: 1.0625rem; background: white; border: 1px dashed var(--ink-200);">Sin convocatorias en el archivo.</p>';
+
+      seccionCerradas.style.display = otras.length > 0 ? 'block' : 'none';
+
+      const metaEl = document.getElementById('resultados-meta');
+      if (metaEl) metaEl.innerHTML = `<strong>${abiertas.length}</strong> abiertas · <strong>${otras.length}</strong> cerradas/evaluación · de ${convocatorias.length} totales`;
+    }
+
+    const selects = document.querySelectorAll('#filtros-conv select, #filtros-conv input[type="search"]');
+    function aplicar() {
+      const state = {};
+      selects.forEach(el => { state[el.name] = el.value; });
+      renderAll(filtrar(convocatorias, state));
+    }
+    selects.forEach(el => el.addEventListener('input', aplicar));
+    document.getElementById('solo-prioritarias').addEventListener('change', aplicar);
+    document.getElementById('reset-filtros').addEventListener('click', () => {
+      selects.forEach(el => { el.value = ''; });
+      document.getElementById('solo-prioritarias').checked = false;
+      aplicar();
+    });
+    aplicar();
+
+    if (window.location.hash) {
+      setTimeout(() => {
+        const target = document.querySelector(window.location.hash);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
+  </script>
+</body>
+</html>

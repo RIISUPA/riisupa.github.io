@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="theme-color" content="#0C447C" />
+  <title>Eventos y webinars · RIISUPA</title>
+  <meta name="description" content="Agenda de webinars, jornadas, talleres y asambleas de RIISUPA. Encuentros abiertos y archivo de eventos pasados con materiales y grabaciones." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Eventos y webinars · RIISUPA" />
+  <meta property="og:description" content="Agenda de webinars, jornadas, talleres y asambleas de RIISUPA. Próximos encuentros y archivo con materiales y grabaciones." />
+  <meta property="og:locale" content="es_AR" />
+  <meta property="og:site_name" content="RIISUPA" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Eventos y webinars · RIISUPA" />
+  <meta name="twitter:description" content="Agenda de webinars, jornadas, talleres y asambleas de RIISUPA. Próximos encuentros y archivo con materiales y grabaciones." />
+
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" />
+  <link rel="stylesheet" href="assets/css/riisupa.css" />
+
+  <style>
+    .evento-card {
+      background: white;
+      border: 1px solid var(--rule);
+      padding: 1.75rem;
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: auto 1fr;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 180ms ease;
+      align-items: start;
+    }
+
+    .evento-card:hover {
+      border-color: var(--primary-400);
+      color: inherit;
+    }
+
+    .evento-fecha-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0.875rem 1rem;
+      background: var(--primary-50);
+      min-width: 80px;
+      text-align: center;
+    }
+
+    .evento-fecha-block.pasado {
+      background: var(--surface-muted);
+    }
+
+    .evento-fecha-dia {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: 500;
+      color: var(--primary-800);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .evento-fecha-block.pasado .evento-fecha-dia {
+      color: var(--ink-500);
+    }
+
+    .evento-fecha-mes {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary-600);
+      margin-top: 0.25rem;
+    }
+
+    .evento-fecha-block.pasado .evento-fecha-mes {
+      color: var(--ink-500);
+    }
+
+    .evento-fecha-anio {
+      font-family: var(--font-mono);
+      font-size: 0.625rem;
+      color: var(--ink-500);
+      margin-top: 0.125rem;
+    }
+
+    .evento-body-head {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .evento-titulo {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--ink-900);
+      margin: 0 0 0.75rem;
+      font-weight: 500;
+    }
+
+    .evento-resumen {
+      font-size: 0.9375rem;
+      line-height: 1.55;
+      color: var(--ink-600);
+      margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .evento-meta {
+      margin-top: 1rem;
+      padding-top: 0.875rem;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .evento-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ink-500);
+    }
+
+    .evento-expositores {
+      margin-top: 1rem;
+      font-size: 0.875rem;
+      color: var(--ink-700);
+    }
+
+    .dias-restantes {
+      background: var(--accent-50);
+      color: var(--accent-800);
+      padding: 0.25rem 0.625rem;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .dias-restantes.urgente {
+      background: var(--amber-50);
+      color: var(--amber-800);
+    }
+
+    .section-divider-eventos {
+      margin: 3rem 0 2rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--ink-200);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .section-divider-eventos h2 {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Saltar al contenido principal</a>
+
+  <div data-slot="header"></div>
+
+  <main id="main">
+
+    <header class="page-header">
+      <div class="container">
+        <p class="eyebrow">Agenda</p>
+        <h1 class="display-lg text-balance">Eventos y webinars</h1>
+        <p class="lead">
+          Encuentros abiertos de la Red: webinars temáticos, jornadas presenciales, talleres prácticos, asambleas. Los webinars se graban y quedan disponibles con sus materiales.
+        </p>
+      </div>
+    </header>
+
+    <section class="filters">
+      <div class="container">
+        <form id="filtros-eventos" style="--filter-count: 3;" class="filters-inner" onsubmit="event.preventDefault();" role="search" aria-label="Filtrar eventos">
+          <div class="filter-field">
+            <label for="busqueda">Buscar por título o palabra clave</label>
+            <input type="search" id="busqueda" name="busqueda" placeholder="Ej.: FHIR, cohorte, salud mental..." autocomplete="off" />
+          </div>
+          <div class="filter-field">
+            <label for="tipo">Tipo</label>
+            <select id="tipo" name="tipo">
+              <option value="">Todos</option>
+            </select>
+          </div>
+          <div class="filter-field">
+            <label for="linea">Línea</label>
+            <select id="linea" name="linea">
+              <option value="">Todas</option>
+            </select>
+          </div>
+          <div class="filter-field">
+            <label for="modalidad">Modalidad</label>
+            <select id="modalidad" name="modalidad">
+              <option value="">Todas</option>
+            </select>
+          </div>
+          <button type="button" id="reset-filtros" class="filter-reset">Limpiar</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 2rem; border-bottom: 0;">
+      <div class="container">
+        <p class="results-meta" id="resultados-meta">—</p>
+
+        <div id="seccion-proximos" style="display: block;">
+          <div class="section-divider-eventos">
+            <h2>Próximos</h2>
+            <a href="#" id="suscribir-rss" class="section-link" onclick="event.preventDefault(); alert('Próximamente: suscripción vía iCal y RSS')">
+              Suscribirse al calendario →
+            </a>
+          </div>
+          <div id="resultados-proximos" style="display: flex; flex-direction: column; gap: 1rem;"></div>
+        </div>
+
+        <div id="seccion-pasados" style="margin-top: 4rem;">
+          <div class="section-divider-eventos">
+            <h2>Archivo</h2>
+            <span class="metadata">Eventos pasados con materiales y grabaciones</span>
+          </div>
+          <div id="resultados-pasados" style="display: flex; flex-direction: column; gap: 1rem;"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section" style="background: var(--surface-muted); border-bottom: 0; margin-top: 4rem;">
+      <div class="container-narrow">
+        <p class="eyebrow">Proponer un evento</p>
+        <h2 class="display-md" style="margin-top: 0.75rem;">¿Querés organizar un webinar o una jornada desde tu universidad?</h2>
+        <p style="margin-top: 1.5rem; font-size: 1.0625rem; line-height: 1.7; color: var(--ink-700);">
+          Los webinars y jornadas son organizados colaborativamente entre las universidades miembro y el Comité Ejecutivo. Podés proponer una charla de tu equipo, un panel sobre un tema temático o una jornada presencial desde tu universidad.
+        </p>
+        <div style="margin-top: 2rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <a href="https://github.com/riisupa/riisupa.org.ar/issues/new?template=propuesta-webinar.yml" class="btn btn-primary">
+            Proponer un webinar
+            <span aria-hidden="true">↗</span>
+          </a>
+          <a href="https://github.com/riisupa" class="btn btn-ghost">
+            Ver repositorios de la Red
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div data-slot="footer"></div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/riisupa.js"></script>
+  <script>
+    RIISUPA_UI.mount('eventos');
+
+    const eventos = [...RIISUPA.eventos];
+    const ahora = new Date();
+
+    /* Selects */
+    const tipoSelect = document.getElementById('tipo');
+    [...new Set(eventos.map(e => e.tipo))].forEach(t => {
+      const opt = document.createElement('option');
+      opt.value = t;
+      opt.textContent = RIISUPA.tipoEventoLabels[t] || t;
+      tipoSelect.appendChild(opt);
+    });
+
+    const lineaSelect = document.getElementById('linea');
+    RIISUPA.lineas.filter(l => l.activa).forEach(l => {
+      const opt = document.createElement('option');
+      opt.value = l.id;
+      opt.textContent = l.nombre;
+      lineaSelect.appendChild(opt);
+    });
+
+    const modalidadSelect = document.getElementById('modalidad');
+    [...new Set(eventos.map(e => e.modalidad))].forEach(m => {
+      const opt = document.createElement('option');
+      opt.value = m;
+      opt.textContent = RIISUPA.modalidadLabels[m] || m;
+      modalidadSelect.appendChild(opt);
+    });
+
+    /* Render */
+    function renderEvento(e, esPasado) {
+      const fecha = new Date(e.fechaInicio);
+      const dia = fecha.getUTCDate();
+      const mes = new Intl.DateTimeFormat('es-AR', { month: 'short', timeZone: 'America/Argentina/Buenos_Aires' }).format(fecha).replace('.', '');
+      const anio = fecha.getUTCFullYear();
+
+      const linea = e.lineaTematica ? RIISUPA.helpers.getLinea(e.lineaTematica) : null;
+      const organizador = e.organizador ? RIISUPA.helpers.getUniversidad(e.organizador) : null;
+
+      let estadoTag = 'tag';
+      if (e.estado === 'confirmado') estadoTag = 'tag tag-accent';
+      else if (e.estado === 'en-vivo') estadoTag = 'tag tag-accent';
+
+      const diasHasta = esPasado ? null : RIISUPA_UI.diasHasta(e.fechaInicio);
+      let badgeDias = '';
+      if (diasHasta !== null && diasHasta >= 0) {
+        const urgente = diasHasta <= 14;
+        const label = diasHasta === 0 ? 'Hoy' : diasHasta === 1 ? 'Mañana' : `en ${diasHasta} días`;
+        badgeDias = `<span class="dias-restantes ${urgente ? 'urgente' : ''}">${label}</span>`;
+      }
+
+      const expositores = (e.expositores || []).slice(0, 2).map(ex =>
+        `<strong>${RIISUPA.helpers.escapeHTML(ex.nombre)}</strong>${ex.universidad ? ' · ' + RIISUPA.helpers.escapeHTML(ex.universidad) : ''}`
+      ).join(' — ');
+
+      const acciones = [];
+      if (!esPasado && e.linkInscripcion) {
+        acciones.push(`<a href="${e.linkInscripcion}" target="_blank" rel="noopener" style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--primary-800);">Inscribirse ↗</a>`);
+      }
+      if (esPasado && e.linkVideo) {
+        acciones.push(`<a href="${e.linkVideo}" target="_blank" rel="noopener" style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--primary-800);">Ver grabación ↗</a>`);
+      }
+      if (esPasado && e.linkMateriales) {
+        acciones.push(`<a href="${e.linkMateriales}" target="_blank" rel="noopener" style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--primary-800);">Materiales ↗</a>`);
+      }
+
+      return `
+        <article class="evento-card" id="${e.id}">
+          <div class="evento-fecha-block ${esPasado ? 'pasado' : ''}">
+            <div class="evento-fecha-dia">${dia}</div>
+            <div class="evento-fecha-mes">${mes}</div>
+            <div class="evento-fecha-anio">${anio}</div>
+          </div>
+
+          <div>
+            <div class="evento-body-head">
+              <span class="tag tag-primary">${RIISUPA.tipoEventoLabels[e.tipo]}</span>
+              <span class="tag">${RIISUPA.modalidadLabels[e.modalidad]}</span>
+              ${!esPasado ? `<span class="${estadoTag}">${RIISUPA.estadoEventoLabels[e.estado]}</span>` : ''}
+              ${linea ? `<span class="tag">${RIISUPA.helpers.escapeHTML(linea.nombre)}</span>` : ''}
+              ${badgeDias}
+            </div>
+
+            <h3 class="evento-titulo">${RIISUPA.helpers.escapeHTML(e.titulo)}</h3>
+            <p class="evento-resumen">${RIISUPA.helpers.escapeHTML(e.resumen)}</p>
+
+            ${expositores ? `<p class="evento-expositores">${expositores}</p>` : ''}
+
+            <div class="evento-meta">
+              <span class="evento-meta-item">
+                ${RIISUPA_UI.formatoFechaHora(e.fechaInicio)}
+              </span>
+              ${e.duracionMinutos ? `<span class="evento-meta-item">${e.duracionMinutos} minutos</span>` : ''}
+              ${organizador ? `<span class="evento-meta-item">Organiza: ${RIISUPA.helpers.escapeHTML(organizador.sigla)}</span>` : ''}
+              ${acciones.length > 0 ? `<span style="margin-left: auto;">${acciones.join(' · ')}</span>` : ''}
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    /* Filter logic */
+    function filtrar(datos, state) {
+      return datos.filter(e => {
+        if (state.busqueda) {
+          const q = RIISUPA.helpers.normalize(state.busqueda);
+          const expositoresText = (e.expositores || []).map(ex => ex.nombre).join(' ');
+          const hay = RIISUPA.helpers.normalize(
+            e.titulo + ' ' + e.resumen + ' ' + expositoresText
+          );
+          if (!hay.includes(q)) return false;
+        }
+        if (state.tipo && e.tipo !== state.tipo) return false;
+        if (state.linea && e.lineaTematica !== state.linea) return false;
+        if (state.modalidad && e.modalidad !== state.modalidad) return false;
+        return true;
+      });
+    }
+
+    function renderAll(filtrados) {
+      const proximos = filtrados
+        .filter(e => new Date(e.fechaInicio) >= ahora && e.estado !== 'finalizado' && e.estado !== 'cancelado')
+        .sort((a, b) => new Date(a.fechaInicio) - new Date(b.fechaInicio));
+      const pasados = filtrados
+        .filter(e => new Date(e.fechaInicio) < ahora || e.estado === 'finalizado')
+        .sort((a, b) => new Date(b.fechaInicio) - new Date(a.fechaInicio));
+
+      const proximosEl = document.getElementById('resultados-proximos');
+      const pasadosEl = document.getElementById('resultados-pasados');
+      const seccionProximos = document.getElementById('seccion-proximos');
+      const seccionPasados = document.getElementById('seccion-pasados');
+
+      proximosEl.innerHTML = proximos.length
+        ? proximos.map(e => renderEvento(e, false)).join('')
+        : '<p style="padding: 2rem; text-align: center; color: var(--ink-500); font-family: var(--font-serif); font-size: 1.0625rem; background: white; border: 1px dashed var(--ink-200);">Sin eventos próximos que coincidan con los filtros.</p>';
+
+      pasadosEl.innerHTML = pasados.length
+        ? pasados.map(e => renderEvento(e, true)).join('')
+        : '<p style="padding: 2rem; text-align: center; color: var(--ink-500); font-family: var(--font-serif); font-size: 1.0625rem; background: white; border: 1px dashed var(--ink-200);">Sin eventos en el archivo que coincidan con los filtros.</p>';
+
+      seccionProximos.style.display = 'block';
+      seccionPasados.style.display = pasados.length > 0 ? 'block' : 'none';
+
+      const metaEl = document.getElementById('resultados-meta');
+      if (metaEl) metaEl.innerHTML = `<strong>${proximos.length}</strong> próximos · <strong>${pasados.length}</strong> archivados · de ${eventos.length} eventos totales`;
+    }
+
+    const selects = document.querySelectorAll('#filtros-eventos select, #filtros-eventos input[type="search"]');
+    function aplicar() {
+      const state = {};
+      selects.forEach(el => { state[el.name] = el.value; });
+      renderAll(filtrar(eventos, state));
+    }
+    selects.forEach(el => el.addEventListener('input', aplicar));
+    document.getElementById('reset-filtros').addEventListener('click', () => {
+      selects.forEach(el => { el.value = ''; });
+      aplicar();
+    });
+    aplicar();
+
+    if (window.location.hash) {
+      setTimeout(() => {
+        const target = document.querySelector(window.location.hash);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
+  </script>
+</body>
+</html>

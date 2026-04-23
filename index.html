@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="theme-color" content="#0C447C" />
+  <title>RIISUPA · Investigación en Salud, en Red</title>
+  <meta name="description" content="Red de 18 universidades privadas argentinas que colaboran en investigación en salud. Proyectos interuniversitarios, ciencia abierta e interoperabilidad FHIR R4." />
+  <meta name="author" content="RIISUPA" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="RIISUPA · Red de Investigación e Innovación en Salud" />
+  <meta property="og:description" content="Red de universidades de gestión privada de Argentina colaborando para investigar e innovar en salud." />
+  <meta property="og:locale" content="es_AR" />
+  <meta property="og:site_name" content="RIISUPA" />
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" />
+  <link rel="stylesheet" href="assets/css/riisupa.css" />
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Saltar al contenido principal</a>
+
+  <div data-slot="header"></div>
+
+  <main id="main">
+
+    <section class="hero">
+      <div class="container hero-inner">
+        <p class="eyebrow">Iniciativa CRUP · 2026</p>
+        <h1 class="display-xl text-balance" style="margin-top: 1.25rem;">
+          Investigar e innovar en salud,
+          <span class="italic-accent">en red.</span>
+        </h1>
+        <p class="lead" style="margin-top: 2rem; max-width: 720px;">
+          Una asociación voluntaria de universidades de gestión privada de Argentina que colaboran para generar evidencia científica, proyectos interdisciplinarios y soluciones con impacto real en el sistema de salud.
+        </p>
+        <div class="hero-cta">
+          <a href="universidades.html" class="btn btn-primary">
+            Conocer la Red
+            <span aria-hidden="true">→</span>
+          </a>
+          <a href="proyectos.html" class="btn btn-ghost">Ver proyectos activos</a>
+          <a href="reglamento.html" class="btn btn-ghost">Leer el reglamento</a>
+        </div>
+
+        <div class="stats-grid">
+          <div>
+            <div class="stat-number" data-stat="universidades">—</div>
+            <p class="stat-label">Universidades miembro</p>
+          </div>
+          <div>
+            <div class="stat-number" data-stat="proyectos">—</div>
+            <p class="stat-label">Proyectos colaborativos</p>
+          </div>
+          <div>
+            <div class="stat-number" data-stat="investigadores">—</div>
+            <p class="stat-label">Investigadores</p>
+          </div>
+          <div>
+            <div class="stat-number" data-stat="lineas">—</div>
+            <p class="stat-label">Líneas activas</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="mision">
+      <div class="container">
+        <div class="grid-two">
+          <div>
+            <p class="eyebrow">Propósito</p>
+            <h2 class="display-md" style="margin-top: 1rem;">
+              Una red que potencia lo que cada universidad hace mejor.
+            </h2>
+          </div>
+          <div class="mvv">
+            <div>
+              <p class="metadata">Misión</p>
+              <p class="lead" style="font-size: 1.125rem; margin-top: 0.75rem;">
+                Fomentar y fortalecer la investigación en salud mediante la colaboración interinstitucional, la optimización de recursos y la transferencia de conocimiento.
+              </p>
+            </div>
+            <div>
+              <p class="metadata">Visión</p>
+              <p class="lead" style="font-size: 1.125rem; margin-top: 0.75rem;">
+                Ser la red de referencia en investigación e innovación en salud del ámbito universitario privado argentino.
+              </p>
+            </div>
+            <div>
+              <p class="metadata">Valores</p>
+              <p class="lead" style="font-size: 1.125rem; margin-top: 0.75rem;">
+                Autonomía universitaria. Colaboración interinstitucional. Rigor científico e integridad académica. Interoperabilidad mediante estándares abiertos (FHIR R4, SNOMED CT, LOINC). Democratización del acceso al conocimiento.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Integrantes</p>
+            <h2 class="display-md" style="margin-top: 0.75rem;">Universidades destacadas</h2>
+          </div>
+          <a href="universidades.html" class="section-link">Ver todas las universidades →</a>
+        </div>
+        <div class="grid" id="universidades-destacadas"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Investigación</p>
+            <h2 class="display-md" style="margin-top: 0.75rem;">Proyectos destacados</h2>
+          </div>
+          <a href="proyectos.html" class="section-link">Todos los proyectos →</a>
+        </div>
+        <div class="grid" id="proyectos-destacados"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Líneas temáticas</p>
+            <h2 class="display-md" style="margin-top: 0.75rem;">Ejes de trabajo de la Red</h2>
+          </div>
+          <a href="lineas_investigacion.html" class="section-link">Todas las líneas →</a>
+        </div>
+        <div class="grid" id="lineas-listado"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Novedades</p>
+            <h2 class="display-md" style="margin-top: 0.75rem;">Desde el blog</h2>
+          </div>
+          <a href="blog.html" class="section-link">Ir al blog →</a>
+        </div>
+        <div class="grid" id="posts-home"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div style="display: grid; gap: 3rem; grid-template-columns: 1fr;" class="home-agenda-grid">
+          <div>
+            <div class="section-header">
+              <div>
+                <p class="eyebrow">Agenda</p>
+                <h2 class="display-md" style="margin-top: 0.75rem;">Próximos eventos</h2>
+              </div>
+              <a href="eventos.html" class="section-link">Ver agenda →</a>
+            </div>
+            <div id="eventos-home" style="display: flex; flex-direction: column; gap: 1rem;"></div>
+          </div>
+          <div>
+            <div class="section-header">
+              <div>
+                <p class="eyebrow">Oportunidades</p>
+                <h2 class="display-md" style="margin-top: 0.75rem;">Convocatorias abiertas</h2>
+              </div>
+              <a href="convocatorias.html" class="section-link">Ver todas →</a>
+            </div>
+            <div id="convocatorias-home" style="display: flex; flex-direction: column; gap: 1rem;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <style>
+      @media (min-width: 1024px) {
+        .home-agenda-grid { grid-template-columns: 1fr 1fr !important; gap: 3rem !important; }
+      }
+    </style>
+
+    <section class="section section-dark">
+      <div class="container" style="display: grid; gap: 3rem; grid-template-columns: 1fr;">
+        <div style="display: grid; gap: 2rem; grid-template-columns: 1fr; align-items: end;" class="cta-grid">
+          <div>
+            <p class="eyebrow">Sumate</p>
+            <h2 class="display-md" style="margin-top: 0.75rem;">
+              ¿Es tu universidad de gestión privada y miembro del CRUP?
+            </h2>
+          </div>
+          <div>
+            <p class="lead">
+              Las universidades que cumplen con los requisitos del <a href="reglamento.html#articulo-8" style="color: var(--accent-100); text-decoration-color: var(--accent-400);">Art. 8 del Reglamento</a> pueden solicitar la adhesión mediante una nota firmada por su máxima autoridad académica.
+            </p>
+            <a href="https://github.com/riisupa/onboarding/issues/new?template=adhesion.yml" class="btn btn-light" style="margin-top: 1.5rem;">
+              Iniciar la adhesión
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div data-slot="footer"></div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/riisupa.js"></script>
+  <script>
+    RIISUPA_UI.mount('inicio');
+
+    /* Stats */
+    document.querySelector('[data-stat="universidades"]').textContent = RIISUPA.universidades.filter(u => u.activa).length + '+';
+    document.querySelector('[data-stat="proyectos"]').textContent = RIISUPA.proyectos.length;
+    document.querySelector('[data-stat="investigadores"]').textContent = RIISUPA.investigadores.filter(i => i.activo).length + '+';
+    document.querySelector('[data-stat="lineas"]').textContent = RIISUPA.lineas.filter(l => l.activa).length;
+
+    /* Universidades destacadas */
+    const destacadas = RIISUPA.universidades.filter(u => u.destacada);
+    document.getElementById('universidades-destacadas').innerHTML = destacadas.map(u => `
+      <a href="universidades.html#${u.id}" class="card as-link">
+        <div class="card-head">
+          <div style="flex: 1;">
+            <p class="eyebrow" style="color: var(--primary-600);">${RIISUPA.helpers.escapeHTML(u.sigla)}</p>
+            <h3 class="card-title">${RIISUPA.helpers.escapeHTML(u.nombre)}</h3>
+            <p class="metadata" style="margin-top: 0.5rem;">${RIISUPA.helpers.escapeHTML(u.ciudad)}, ${RIISUPA.helpers.escapeHTML(u.provincia)}</p>
+          </div>
+        </div>
+        <p class="card-description">${RIISUPA.helpers.escapeHTML(u.descripcion)}</p>
+      </a>
+    `).join('');
+
+    /* Proyectos destacados */
+    const pDestacados = RIISUPA.proyectos.filter(p => p.destacado);
+    document.getElementById('proyectos-destacados').innerHTML = pDestacados.map(p => {
+      const lider = RIISUPA.helpers.getUniversidad(p.universidadLider);
+      const linea = RIISUPA.helpers.getLinea(p.linea);
+      const estadoLabel = RIISUPA.estadoLabels[p.estado];
+      const estadoTag = ['avalado', 'en-ejecucion'].includes(p.estado) ? 'tag-accent' : 'tag-primary';
+      return `
+        <a href="proyectos.html#${p.id}" class="card as-link">
+          <div class="card-head" style="flex-direction: row;">
+            <div style="display: flex; gap: 0.375rem; flex-wrap: wrap;">
+              <span class="tag ${estadoTag}">${estadoLabel}</span>
+              ${p.usaFHIR ? '<span class="tag tag-accent">FHIR R4</span>' : ''}
+            </div>
+            <span class="metadata">${p.universidadesParticipantes.length} universidades</span>
+          </div>
+          <h3 class="card-title" style="margin-top: 1rem;">${RIISUPA.helpers.escapeHTML(p.titulo)}</h3>
+          <p class="card-description">${RIISUPA.helpers.escapeHTML(p.resumen)}</p>
+          <dl class="card-meta">
+            <div>
+              <dt>Línea</dt>
+              <dd>${RIISUPA.helpers.escapeHTML(linea.nombre)}</dd>
+            </div>
+            <div>
+              <dt>U. líder</dt>
+              <dd>${RIISUPA.helpers.escapeHTML(lider.sigla)}</dd>
+            </div>
+          </dl>
+        </a>
+      `;
+    }).join('');
+
+    /* Líneas de investigación */
+    const lineasActivas = RIISUPA.lineas.filter(l => l.activa);
+    document.getElementById('lineas-listado').innerHTML = lineasActivas.map(l => {
+      const nProy = RIISUPA.proyectos.filter(p => p.linea === l.id).length;
+      return `
+        <a href="lineas_investigacion.html#${l.id}" class="card as-link">
+          <p class="eyebrow" style="color: var(--primary-600);">Línea</p>
+          <h3 class="card-title" style="margin-top: 0.5rem;">${RIISUPA.helpers.escapeHTML(l.nombre)}</h3>
+          <p class="card-description">${RIISUPA.helpers.escapeHTML(l.descripcion)}</p>
+          <p class="metadata" style="margin-top: 1rem;">${nProy} proyecto${nProy === 1 ? '' : 's'}</p>
+        </a>
+      `;
+    }).join('');
+
+    /* Posts del blog — 3 más recientes */
+    const postsRecientes = [...RIISUPA.posts]
+      .sort((a, b) => b.fechaPublicacion.localeCompare(a.fechaPublicacion))
+      .slice(0, 3);
+    document.getElementById('posts-home').innerHTML = postsRecientes.map(p => {
+      const linea = p.linea ? RIISUPA.helpers.getLinea(p.linea) : null;
+      return `
+        <a href="blog.html#${p.id}" class="card as-link">
+          <div style="display: flex; gap: 0.375rem; flex-wrap: wrap; margin-bottom: 0.75rem;">
+            <span class="tag">${RIISUPA.tipoPostLabels[p.tipo]}</span>
+            ${linea ? `<span class="tag tag-primary">${RIISUPA.helpers.escapeHTML(linea.nombre)}</span>` : ''}
+          </div>
+          <h3 class="card-title">${RIISUPA.helpers.escapeHTML(p.titulo)}</h3>
+          <p class="card-description">${RIISUPA.helpers.escapeHTML(p.bajada)}</p>
+          <p class="metadata" style="margin-top: 1rem;">${RIISUPA_UI.formatoFechaCorta(p.fechaPublicacion)} · ${p.tiempoLectura} min</p>
+        </a>
+      `;
+    }).join('');
+
+    /* Eventos próximos */
+    const ahora = new Date();
+    const eventosProximos = RIISUPA.eventos
+      .filter(e => new Date(e.fechaInicio) >= ahora && e.estado !== 'finalizado' && e.estado !== 'cancelado')
+      .sort((a, b) => new Date(a.fechaInicio) - new Date(b.fechaInicio))
+      .slice(0, 3);
+    document.getElementById('eventos-home').innerHTML = eventosProximos.length ? eventosProximos.map(e => {
+      const dias = RIISUPA_UI.diasHasta(e.fechaInicio);
+      const diasLabel = dias === 0 ? 'Hoy' : dias === 1 ? 'Mañana' : `en ${dias} días`;
+      return `
+        <a href="eventos.html#${e.id}" style="display: block; padding: 1.25rem; background: white; border: 1px solid var(--rule); text-decoration: none; color: inherit; transition: border-color 180ms ease;"
+           onmouseover="this.style.borderColor='var(--primary-400)'"
+           onmouseout="this.style.borderColor='var(--rule)'">
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.625rem;">
+            <span class="tag tag-primary">${RIISUPA.tipoEventoLabels[e.tipo]}</span>
+            <span class="tag tag-accent">${diasLabel}</span>
+          </div>
+          <h3 style="font-family: var(--font-serif); font-size: 1.0625rem; line-height: 1.25; font-weight: 500; color: var(--ink-900); margin: 0 0 0.5rem;">${RIISUPA.helpers.escapeHTML(e.titulo)}</h3>
+          <p class="metadata">${RIISUPA_UI.formatoFechaHora(e.fechaInicio)}</p>
+        </a>
+      `;
+    }).join('') : '<p style="color: var(--ink-500); padding: 1rem;">Sin eventos próximos programados.</p>';
+
+    /* Convocatorias abiertas más urgentes */
+    const convAbiertas = RIISUPA.convocatorias
+      .filter(c => c.estado === 'abierta' && RIISUPA_UI.diasHasta(c.fechaCierre) >= 0)
+      .sort((a, b) => new Date(a.fechaCierre) - new Date(b.fechaCierre))
+      .slice(0, 3);
+    document.getElementById('convocatorias-home').innerHTML = convAbiertas.length ? convAbiertas.map(c => {
+      const dias = RIISUPA_UI.diasHasta(c.fechaCierre);
+      const urgente = dias <= 14;
+      return `
+        <a href="convocatorias.html#${c.id}" style="display: block; padding: 1.25rem; background: white; border: 1px solid var(--rule); text-decoration: none; color: inherit; transition: border-color 180ms ease;${c.prioritariaParaRed ? ' border-left: 3px solid var(--accent-600);' : ''}"
+           onmouseover="this.style.borderColor='var(--primary-400)'"
+           onmouseout="this.style.borderColor='var(--rule)'">
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.625rem;">
+            <span class="tag tag-primary">${RIISUPA.tipoConvocatoriaLabels[c.tipo]}</span>
+            <span class="tag ${urgente ? 'tag-amber' : 'tag-accent'}">Cierra en ${dias} d</span>
+          </div>
+          <h3 style="font-family: var(--font-serif); font-size: 1.0625rem; line-height: 1.25; font-weight: 500; color: var(--ink-900); margin: 0 0 0.5rem;">${RIISUPA.helpers.escapeHTML(c.titulo)}</h3>
+          <p class="metadata">${RIISUPA.helpers.escapeHTML(c.organismo)}</p>
+        </a>
+      `;
+    }).join('') : '<p style="color: var(--ink-500); padding: 1rem;">Sin convocatorias abiertas en este momento.</p>';
+  </script>
+</body>
+</html>
