@@ -156,7 +156,7 @@
 
     /* Card render */
     function renderProyecto(p) {
-      const lider = RIISUPA.helpers.getUniversidad(p.universidadLider);
+      const coordinadora = RIISUPA.helpers.getUniversidad(p.universidadCoordinadora);
       const linea = RIISUPA.helpers.getLinea(p.linea);
       const ip = RIISUPA.helpers.getInvestigador(p.investigadorPrincipal);
       const estadoLabel = RIISUPA.estadoLabels[p.estado];
@@ -175,6 +175,12 @@
         .slice(0, 5)
         .map(k => `<span class="tag">${RIISUPA.helpers.escapeHTML(k)}</span>`)
         .join('');
+
+      const contactoCoord = coordinadora && coordinadora.representanteTitular
+        ? coordinadora.representanteTitular.email
+        : null;
+
+      const fechaInicioFmt = RIISUPA_UI.formatoFechaLarga(p.fechaInicio);
 
       return `
         <article class="card" id="${p.id}">
@@ -199,12 +205,12 @@
               <dd>${RIISUPA.helpers.escapeHTML(tipoLabel)}</dd>
             </div>
             <div>
-              <dt>U. líder</dt>
-              <dd>${RIISUPA.helpers.escapeHTML(lider.sigla)}</dd>
+              <dt>U. coordinadora</dt>
+              <dd>${RIISUPA.helpers.escapeHTML(coordinadora.sigla)}</dd>
             </div>
             <div>
-              <dt>Duración</dt>
-              <dd>${p.duracionMeses} meses</dd>
+              <dt>Inicio</dt>
+              <dd>${fechaInicioFmt}</dd>
             </div>
           </dl>
 
@@ -214,6 +220,15 @@
               ${ip ? RIISUPA.helpers.escapeHTML(ip.nombre + ' ' + ip.apellido) : '—'}
             </p>
           </div>
+
+          ${contactoCoord ? `
+          <div style="margin-top: 0.75rem;">
+            <p class="metadata">Contacto de la U. coordinadora</p>
+            <p style="margin-top: 0.375rem; font-size: 0.8125rem; color: var(--primary-800); font-family: var(--font-mono); word-break: break-all;">
+              <a href="mailto:${RIISUPA.helpers.escapeHTML(contactoCoord)}" style="color: inherit; text-decoration: none;">${RIISUPA.helpers.escapeHTML(contactoCoord)}</a>
+            </p>
+          </div>
+          ` : ''}
 
           <div style="margin-top: 0.75rem;">
             <p class="metadata">Universidades participantes</p>

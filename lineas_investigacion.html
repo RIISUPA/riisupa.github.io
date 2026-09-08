@@ -107,7 +107,7 @@
       const bg = colorMap[linea.color] || 'var(--surface-muted)';
 
       const proyectosHTML = proyectos.length ? proyectos.map(p => {
-        const lider = RIISUPA.helpers.getUniversidad(p.universidadLider);
+        const coordinadora = RIISUPA.helpers.getUniversidad(p.universidadCoordinadora);
         const estadoLabel = RIISUPA.estadoLabels[p.estado];
         let estadoTag = 'tag';
         if (['avalado', 'en-ejecucion'].includes(p.estado)) estadoTag = 'tag tag-accent';
@@ -119,7 +119,7 @@
               ${p.usaFHIR ? '<span class="tag tag-accent">FHIR R4</span>' : ''}
             </div>
             <h4 style="font-family: var(--font-serif); font-size: 1.0625rem; line-height: 1.25; letter-spacing: -0.02em; font-weight: 500; color: var(--ink-900); margin: 0;">${RIISUPA.helpers.escapeHTML(p.titulo)}</h4>
-            <p style="margin-top: 0.5rem; font-size: 0.8125rem; color: var(--ink-500); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em;">${RIISUPA.helpers.escapeHTML(lider.sigla)} · ${p.universidadesParticipantes.length} U.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.8125rem; color: var(--ink-500); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em;">Coord.: ${RIISUPA.helpers.escapeHTML(coordinadora.sigla)} · ${p.universidadesParticipantes.length} U.</p>
           </a>
         `;
       }).join('') : `<p style="grid-column: 1/-1; padding: 2rem; text-align: center; color: var(--ink-500); font-family: var(--font-serif); font-size: 1.0625rem;">Aún no hay proyectos asociados a esta línea.</p>`;
@@ -127,13 +127,13 @@
       const investigadoresHTML = investigadores.length ? investigadores.slice(0, 6).map(inv => {
         const inicial = (inv.nombre[0] + inv.apellido[0]).toUpperCase();
         return `
-          <a href="investigadores.html#${inv.id}" style="text-decoration: none; display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; background: white; border: 1px solid var(--ink-200);">
+          <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; background: white; border: 1px solid var(--ink-200);">
             <span style="width: 36px; height: 36px; border-radius: 50%; background: var(--primary-50); color: var(--primary-800); display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 0.875rem; font-weight: 500; flex-shrink: 0;">${inicial}</span>
             <span style="min-width: 0;">
               <span style="display: block; font-size: 0.875rem; color: var(--ink-800);">${RIISUPA.helpers.escapeHTML(inv.nombre + ' ' + inv.apellido)}</span>
               <span style="display: block; font-size: 0.75rem; color: var(--ink-500); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em;">${RIISUPA.categoriaLabels[inv.categoria]}</span>
             </span>
-          </a>
+          </div>
         `;
       }).join('') : `<p style="grid-column: 1/-1; color: var(--ink-500); font-size: 0.875rem;">Sin investigadores declarados todavía en esta línea.</p>`;
 
