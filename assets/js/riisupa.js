@@ -10,13 +10,10 @@
     { href: 'index.html', label: 'Inicio', key: 'inicio' },
     { href: 'la_red.html', label: 'La Red', key: 'la-red' },
     { href: 'universidades.html', label: 'Universidades', key: 'universidades' },
-    { href: 'investigadores.html', label: 'Investigadores', key: 'investigadores' },
     { href: 'proyectos.html', label: 'Proyectos', key: 'proyectos' },
     { href: 'lineas_investigacion.html', label: 'Líneas', key: 'lineas' },
     { href: 'convocatorias.html', label: 'Convocatorias', key: 'convocatorias' },
-    { href: 'eventos.html', label: 'Eventos', key: 'eventos' },
-    { href: 'blog.html', label: 'Blog', key: 'blog' },
-    { href: 'reglamento.html', label: 'Reglamento', key: 'reglamento' },
+    { href: 'eventos.html', label: 'Actividades', key: 'eventos' },
   ];
 
   function renderHeader(activeKey) {
@@ -48,9 +45,9 @@
           </nav>
 
           <div class="header-actions">
-            <a href="https://github.com/riisupa" target="_blank" rel="noopener"
+            <a href="${window.RIISUPA.contacto.linkedin}" target="_blank" rel="noopener"
                style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-500); text-decoration: none;">
-              GitHub ↗
+              LinkedIn ↗
             </a>
           </div>
 
@@ -85,12 +82,14 @@
               <p class="footer-tagline">
                 Universidades de gestión privada de Argentina colaborando para generar evidencia científica y soluciones con impacto en el sistema de salud.
               </p>
-              <a href="#" class="status-link" style="margin-top: 1rem; text-decoration: none;">
-                <span class="status-dot" aria-hidden="true"></span>
-                <span style="font-family: var(--font-mono); font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-500);">
-                  Estado de servicios
-                </span>
-              </a>
+              <div style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.625rem;">
+                <a href="mailto:${window.RIISUPA.contacto.email}" style="font-family: var(--font-mono); font-size: 0.8125rem; color: var(--ink-700); text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
+                  <span aria-hidden="true">✉</span> ${window.RIISUPA.contacto.email}
+                </a>
+                <a href="${window.RIISUPA.contacto.linkedin}" target="_blank" rel="noopener" style="font-family: var(--font-mono); font-size: 0.8125rem; color: var(--ink-700); text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
+                  <span aria-hidden="true">in</span> LinkedIn de la Red ↗
+                </a>
+              </div>
             </div>
 
             <div class="footer-cols">
@@ -98,8 +97,8 @@
                 <h3>La Red</h3>
                 <ul>
                   <li><a href="la_red.html">Estructura institucional</a></li>
-                  <li><a href="reglamento.html">Reglamento</a></li>
                   <li><a href="la_red.html#comite">Autoridades</a></li>
+                  <li><a href="la_red.html#asamblea">Asamblea de miembros</a></li>
                   <li><a href="universidades.html">Universidades miembro</a></li>
                 </ul>
               </div>
@@ -108,26 +107,8 @@
                 <ul>
                   <li><a href="proyectos.html">Proyectos</a></li>
                   <li><a href="lineas_investigacion.html">Líneas</a></li>
-                  <li><a href="investigadores.html">Investigadores</a></li>
-                  <li><a href="https://github.com/riisupa/data-standards">Estándares FHIR R4 ↗</a></li>
-                </ul>
-              </div>
-              <div class="footer-col">
-                <h3>Comunidad</h3>
-                <ul>
-                  <li><a href="eventos.html">Eventos y webinars</a></li>
-                  <li><a href="blog.html">Blog y novedades</a></li>
                   <li><a href="convocatorias.html">Convocatorias</a></li>
-                  <li><a href="https://github.com/orgs/riisupa/discussions">Discussions ↗</a></li>
-                </ul>
-              </div>
-              <div class="footer-col">
-                <h3>Contacto</h3>
-                <ul>
-                  <li><a href="mailto:contacto@riisupa.org.ar">contacto@riisupa.org.ar</a></li>
-                  <li><a href="mailto:comite@riisupa.org.ar">Comité Ejecutivo</a></li>
-                  <li><a href="mailto:proyectos@riisupa.org.ar">Proyectos</a></li>
-                  <li><a href="mailto:prensa@riisupa.org.ar">Prensa</a></li>
+                  <li><a href="eventos.html">Actividades</a></li>
                 </ul>
               </div>
             </div>
@@ -136,10 +117,8 @@
           <div class="footer-bottom">
             <p>© ${year} RIISUPA · Asociación voluntaria sin fines de lucro</p>
             <div class="footer-links">
-              <a href="#">Licencias</a>
-              <a href="#">Privacidad</a>
-              <a href="#">Accesibilidad</a>
-              <a href="https://github.com/riisupa">GitHub ↗</a>
+              <a href="mailto:${window.RIISUPA.contacto.email}">Contacto</a>
+              <a href="${window.RIISUPA.contacto.linkedin}" target="_blank" rel="noopener">LinkedIn ↗</a>
             </div>
           </div>
         </div>

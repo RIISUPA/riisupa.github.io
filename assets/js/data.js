@@ -9,6 +9,17 @@
 window.RIISUPA = window.RIISUPA || {};
 
 /* =======================================================================
+   CONTACTO OFICIAL Y REDES DE LA RED
+   Una sola casilla de correo y perfil de LinkedIn, aprobados por la
+   Comisión de Comunicación (24/8).
+   ======================================================================= */
+
+window.RIISUPA.contacto = {
+  email: 'rediisupa@gmail.com',
+  linkedin: 'https://www.linkedin.com/company/red-de-investigaci%C3%B3n-e-innovaci%C3%B3n-en-salud-de-universidades-privadas-de-argentina-riisupa',
+};
+
+/* =======================================================================
    LÍNEAS DE INVESTIGACIÓN
    ======================================================================= */
 
@@ -453,7 +464,7 @@ window.RIISUPA.proyectos = [
     tipoEstudio: 'observacional-cohorte',
     linea: 'enfermedades-cronicas',
     investigadorPrincipal: 'carlos-benitez',
-    universidadLider: 'universidad-favaloro',
+    universidadCoordinadora: 'universidad-favaloro',
     universidadesParticipantes: ['universidad-favaloro', 'universidad-austral', 'itba', 'cemic'],
     fechaInicio: '2026-02-01',
     duracionMeses: 36,
@@ -470,7 +481,7 @@ window.RIISUPA.proyectos = [
     tipoEstudio: 'observacional-transversal',
     linea: 'salud-mental',
     investigadorPrincipal: 'laura-peralta',
-    universidadLider: 'usal',
+    universidadCoordinadora: 'usal',
     universidadesParticipantes: ['usal', 'u-flores', 'umsa', 'uai', 'ucsf', 'universidad-favaloro'],
     fechaInicio: '2026-03-01',
     duracionMeses: 18,
@@ -487,7 +498,7 @@ window.RIISUPA.proyectos = [
     tipoEstudio: 'observacional-caso-control',
     linea: 'oncologia',
     investigadorPrincipal: 'diego-soria',
-    universidadLider: 'cemic',
+    universidadCoordinadora: 'cemic',
     universidadesParticipantes: ['cemic', 'universidad-austral', 'universidad-favaloro'],
     fechaInicio: '2026-05-01',
     duracionMeses: 24,
@@ -504,7 +515,7 @@ window.RIISUPA.proyectos = [
     tipoEstudio: 'investigacion-aplicada',
     linea: 'bioingenieria',
     investigadorPrincipal: 'valeria-ibanez',
-    universidadLider: 'itba',
+    universidadCoordinadora: 'itba',
     universidadesParticipantes: ['itba', 'universidad-favaloro', 'universidad-austral'],
     fechaInicio: '2026-06-01',
     duracionMeses: 24,
@@ -521,7 +532,7 @@ window.RIISUPA.proyectos = [
     tipoEstudio: 'observacional-cohorte',
     linea: 'enfermedades-cronicas',
     investigadorPrincipal: 'mauricio-laborda',
-    universidadLider: 'ufasta',
+    universidadCoordinadora: 'ufasta',
     universidadesParticipantes: ['ufasta', 'universidad-atlantida', 'itba'],
     fechaInicio: '2026-04-01',
     duracionMeses: 48,
@@ -538,7 +549,7 @@ window.RIISUPA.proyectos = [
     tipoEstudio: 'observacional-cohorte',
     linea: 'salud-mental',
     investigadorPrincipal: 'romina-acevedo',
-    universidadLider: 'universidad-favaloro',
+    universidadCoordinadora: 'universidad-favaloro',
     universidadesParticipantes: ['universidad-favaloro', 'usal', 'cemic'],
     fechaInicio: '2026-08-01',
     duracionMeses: 60,
@@ -555,7 +566,7 @@ window.RIISUPA.proyectos = [
     tipoEstudio: 'observacional-cohorte',
     linea: 'salud-materno-infantil',
     investigadorPrincipal: 'fernando-galvan',
-    universidadLider: 'barcelo',
+    universidadCoordinadora: 'barcelo',
     universidadesParticipantes: ['barcelo', 'unsta', 'uspt'],
     fechaInicio: '2025-10-01',
     duracionMeses: 30,
@@ -822,6 +833,59 @@ window.RIISUPA.eventos = [
     organizador: 'cemic',
     destacado: false,
   },
+  {
+    id: 'dia-mundial-salud-mental-2026',
+    titulo: 'Día Mundial de la Salud Mental — Jornada de reflexión abierta',
+    tipo: 'efemeride',
+    estado: 'programado',
+    fechaInicio: '2026-10-10T14:00:00Z',
+    duracionMinutos: 180,
+    modalidad: 'hibrido',
+    plataforma: 'Zoom + presencial',
+    ubicacion: 'USAL, sede a confirmar',
+    resumen: 'Jornada abierta en el marco del Día Mundial de la Salud Mental. Universidades miembro comparten avances de sus proyectos e investigadoras invitadas presentan reflexiones sobre acceso, prevención y determinantes sociales. Organiza USAL con invitación abierta a la Red.',
+    expositores: [],
+    lineaTematica: 'salud-mental',
+    publico: 'mixto',
+    idioma: 'español',
+    organizador: 'usal',
+    destacado: false,
+  },
+  {
+    id: 'dia-mundial-cancer-2026',
+    titulo: 'Día Mundial contra el Cáncer — Ciclo de charlas',
+    tipo: 'efemeride',
+    estado: 'programado',
+    fechaInicio: '2026-02-04T14:00:00Z',
+    duracionMinutos: 120,
+    modalidad: 'virtual',
+    plataforma: 'Zoom',
+    resumen: 'Ciclo de charlas breves en el marco del Día Mundial contra el Cáncer. Investigadoras e investigadores de universidades miembro comparten avances en oncología. Organiza CEMIC, con invitación abierta a la Red.',
+    expositores: [],
+    lineaTematica: 'oncologia',
+    publico: 'mixto',
+    idioma: 'español',
+    organizador: 'cemic',
+    destacado: false,
+  },
+  {
+    id: 'iniciativa-favaloro-cv-2026',
+    titulo: 'Jornada anual de investigación cardiovascular Favaloro — abierta a la Red',
+    tipo: 'iniciativa-institucional',
+    estado: 'programado',
+    fechaInicio: '2026-09-25T13:00:00Z',
+    duracionMinutos: 300,
+    modalidad: 'hibrido',
+    plataforma: 'Presencial + streaming',
+    ubicacion: 'Universidad Favaloro, CABA',
+    resumen: 'Jornada anual de investigación cardiovascular organizada por Universidad Favaloro, con invitación abierta a investigadores de universidades miembro de RIISUPA para presentar trabajos afines.',
+    expositores: [],
+    lineaTematica: 'enfermedades-cronicas',
+    publico: 'investigadores',
+    idioma: 'español',
+    organizador: 'universidad-favaloro',
+    destacado: false,
+  },
 ];
 
 /* =======================================================================
@@ -1055,6 +1119,8 @@ window.RIISUPA.tipoEventoLabels = {
   'charla': 'Charla',
   'asamblea': 'Asamblea',
   'reunion-comite': 'Reunión de Comité',
+  'efemeride': 'Efeméride',
+  'iniciativa-institucional': 'Iniciativa institucional',
 };
 
 window.RIISUPA.estadoEventoLabels = {
