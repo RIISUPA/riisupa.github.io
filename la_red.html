@@ -6,42 +6,47 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta name="theme-color" content="#0C447C" />
   <title>La Red · RIISUPA</title>
-  <meta name="description" content="Estructura institucional de RIISUPA: autoridades del Comité Ejecutivo, Asamblea de miembros y canal de contacto oficial de la Red." />
+  <meta name="description" content="Qué es RIISUPA, su estructura institucional, el Comité Ejecutivo, los integrantes de la Asamblea de Miembros por universidad y el canal de contacto oficial de la Red." />
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="La Red · RIISUPA" />
-  <meta property="og:description" content="Estructura institucional de RIISUPA: autoridades del Comité Ejecutivo, Asamblea de miembros y canal de contacto oficial de la Red." />
+  <meta property="og:description" content="Qué es RIISUPA, su estructura institucional, el Comité Ejecutivo y los integrantes de la Asamblea de Miembros por universidad." />
   <meta property="og:locale" content="es_AR" />
   <meta property="og:site_name" content="RIISUPA" />
 
-  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="La Red · RIISUPA" />
-  <meta name="twitter:description" content="Estructura institucional de RIISUPA: autoridades del Comité Ejecutivo, Asamblea de miembros y canal de contacto oficial de la Red." />
-
+  <meta name="twitter:description" content="Qué es RIISUPA, su estructura institucional, el Comité Ejecutivo y los integrantes de la Asamblea de Miembros por universidad." />
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" />
   <link rel="stylesheet" href="assets/css/riisupa.css" />
 
   <style>
-    .aviso-provisorio {
-      background: var(--amber-50);
-      border-left: 3px solid var(--amber-600);
-      padding: 1rem 1.25rem;
-      margin: 2rem 0;
-      font-size: 0.9375rem;
-      line-height: 1.55;
-      color: var(--amber-800);
+    .texto-institucional {
+      max-width: 760px;
+      margin-top: 1.5rem;
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      color: var(--ink-700);
     }
 
-    .aviso-provisorio strong { font-weight: 500; color: var(--amber-800); }
+    .page-header .lead + .lead { margin-top: 1.25rem; }
+
+    /* Comité Ejecutivo */
+    .autoridades-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      margin-top: 2.5rem;
+    }
 
     .autoridad-card {
-      background: white;
+      background: var(--surface-raised);
       border: 1px solid var(--rule);
       padding: 2rem;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 0.75rem;
     }
 
     .autoridad-role {
@@ -63,77 +68,64 @@
       margin: 0;
     }
 
-    .autoridad-nombre.placeholder {
-      color: var(--ink-400);
-      font-style: italic;
-    }
-
     .autoridad-uni {
       font-size: 0.9375rem;
+      line-height: 1.45;
       color: var(--ink-600);
       margin: 0;
     }
 
-    .autoridad-card dl {
-      margin: 0;
+    .autoridad-uni a { color: inherit; }
+    .autoridad-uni a:hover { color: var(--primary-800); }
+
+    .autoridad-periodo {
+      margin-top: auto;
       padding-top: 1rem;
       border-top: 1px solid var(--rule);
-      display: grid;
-      gap: 0.75rem;
-    }
-
-    .autoridad-card dt {
       font-family: var(--font-mono);
-      font-size: 0.6875rem;
+      font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: var(--ink-500);
-      margin: 0 0 0.125rem;
     }
 
-    .autoridad-card dd {
-      margin: 0;
-      font-size: 0.875rem;
-      color: var(--ink-700);
-    }
-
-    .autoridad-card dd.email-placeholder {
-      color: var(--ink-400);
-      font-style: italic;
-      font-family: var(--font-mono);
-      font-size: 0.8125rem;
-    }
-
+    /* Asamblea de Miembros */
     .asamblea-table {
-      background: white;
+      background: var(--surface-raised);
       border: 1px solid var(--rule);
-      overflow: hidden;
+      margin-top: 1rem;
     }
 
     .asamblea-row {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 0.5rem;
+      gap: 0.875rem;
       padding: 1.25rem 1.5rem;
       border-bottom: 1px solid var(--rule);
-      align-items: center;
+      scroll-margin-top: 5rem;
     }
 
     .asamblea-row:last-child { border-bottom: 0; }
 
+    .asamblea-header { display: none; }
+
     @media (min-width: 768px) {
       .asamblea-row {
-        grid-template-columns: 2fr 2fr 2fr;
-        gap: 1.5rem;
+        grid-template-columns: 5fr 7fr;
+        gap: 2rem;
+        align-items: start;
+      }
+
+      .asamblea-header {
+        display: grid;
+        background: var(--surface-muted);
+        border-bottom: 1px solid var(--ink-200);
+        padding-top: 0.875rem;
+        padding-bottom: 0.875rem;
       }
     }
 
-    .asamblea-header {
-      background: var(--surface-muted);
-      border-bottom: 1px solid var(--ink-200);
-    }
-
-    .asamblea-header .col-label {
+    .col-label {
       font-family: var(--font-mono);
       font-size: 0.6875rem;
       text-transform: uppercase;
@@ -145,7 +137,7 @@
     .asamblea-uni-nombre {
       font-family: var(--font-serif);
       font-size: 1.0625rem;
-      line-height: 1.2;
+      line-height: 1.25;
       letter-spacing: -0.015em;
       color: var(--ink-900);
       font-weight: 500;
@@ -157,117 +149,104 @@
       text-decoration: none;
     }
 
-    .asamblea-uni-nombre a:hover {
-      color: var(--primary-800);
-    }
+    .asamblea-uni-nombre a:hover { color: var(--primary-800); }
 
-    .asamblea-uni-sigla {
+    .asamblea-uni-sedes {
       font-family: var(--font-mono);
       font-size: 0.6875rem;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
+      line-height: 1.5;
       color: var(--ink-500);
-      margin: 0.25rem 0 0;
+      margin: 0.375rem 0 0;
+    }
+
+    .integrantes-lista {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0.75rem;
     }
 
     .rep-nombre {
       font-size: 0.9375rem;
+      font-weight: 500;
       color: var(--ink-800);
       margin: 0;
     }
 
     .rep-cargo {
       font-size: 0.8125rem;
+      line-height: 1.45;
       color: var(--ink-500);
       margin: 0.125rem 0 0;
     }
 
-    .contacto-grid {
+    /* Contacto */
+    .contacto-canales {
+      margin-top: 2.5rem;
       display: grid;
-      gap: 1rem;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      margin-top: 2rem;
+      gap: 1.25rem;
+      grid-template-columns: 1fr;
     }
 
-    .contacto-card {
-      background: white;
+    @media (min-width: 768px) {
+      .contacto-canales { grid-template-columns: 1fr 1fr; }
+    }
+
+    .contacto-canal-card {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.25rem;
+      padding: 1.75rem;
+      background: var(--surface-raised);
       border: 1px solid var(--rule);
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 180ms ease;
+      align-items: start;
     }
 
-    .contacto-label {
+    .contacto-canal-card:hover { border-color: var(--primary-400); color: inherit; }
+
+    .contacto-canal-icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary-50);
+      color: var(--primary-800);
+      font-family: var(--font-serif);
+      font-size: 1.375rem;
+      font-weight: 500;
+    }
+
+    .contacto-canal-label {
       font-family: var(--font-mono);
       font-size: 0.6875rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: var(--accent-600);
+      color: var(--ink-500);
       margin: 0;
     }
 
-    .contacto-titulo {
-      font-family: var(--font-serif);
-      font-size: 1.125rem;
-      line-height: 1.2;
-      letter-spacing: -0.02em;
-      color: var(--ink-900);
-      font-weight: 500;
-      margin: 0;
-    }
-
-    .contacto-descripcion {
-      font-size: 0.875rem;
-      line-height: 1.5;
-      color: var(--ink-600);
-      margin: 0.375rem 0 0.75rem;
-    }
-
-    .contacto-email {
-      font-family: var(--font-mono);
-      font-size: 0.875rem;
-      color: var(--primary-800);
-      margin: 0;
-      word-break: break-all;
-    }
-
-    .mvv-card-large {
-      background: white;
-      border: 1px solid var(--rule);
-      padding: 2rem;
-    }
-
-    .mvv-card-large p.eyebrow {
-      margin: 0 0 0.75rem;
-    }
-
-    .mvv-card-large h3 {
+    .contacto-canal-value {
       font-family: var(--font-serif);
       font-size: 1.25rem;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
       color: var(--ink-900);
       font-weight: 500;
-      margin: 0 0 0.75rem;
+      margin: 0.25rem 0 0.5rem;
+      letter-spacing: -0.02em;
+      word-break: break-word;
     }
 
-    .mvv-card-large p {
-      font-size: 1rem;
-      line-height: 1.6;
-      color: var(--ink-700);
+    .contacto-canal-hint {
+      font-size: 0.875rem;
+      color: var(--ink-600);
       margin: 0;
-    }
-
-    .gobernanza-grid {
-      display: grid;
-      gap: 1rem;
-      grid-template-columns: 1fr;
-      margin-top: 2.5rem;
-    }
-
-    @media (min-width: 768px) {
-      .gobernanza-grid { grid-template-columns: repeat(3, 1fr); }
+      line-height: 1.5;
     }
   </style>
 </head>
@@ -284,7 +263,10 @@
         <p class="eyebrow">Institucional</p>
         <h1 class="display-lg text-balance">La Red</h1>
         <p class="lead">
-          RIISUPA es una asociación voluntaria de universidades de gestión privada de Argentina, sin fines de lucro, cuyo funcionamiento se rige por un reglamento aprobado por su Asamblea de Miembros. Esta página resume su estructura institucional, autoridades y canales de contacto oficiales.
+          La Red de Investigación e Innovación en Salud de Universidades de gestión privada de Argentina - RIISUPA es una iniciativa conjunta impulsada por varias universidades privadas del país, orientada al fortalecimiento de la investigación y la innovación. Su creación tiene como propósito facilitar una colaboración más estrecha entre instituciones en sus distintas áreas de actividad. Su propósito es contribuir a mejorar el nivel de institucionalización de la investigación, lograr un acercamiento entre los distintos actores que desarrollan sus actividades vinculadas a las ciencias de la salud, con el objeto de orientar prioridades para el trabajo colaborativo y a potenciar la investigación como resultado de la colaboración interinstitucional.
+        </p>
+        <p class="lead">
+          La conformación de RIISUPA reafirma el compromiso de las universidades participantes con la generación de conocimiento, la innovación y el aporte al sistema de salud y a la sociedad.
         </p>
         <div style="margin-top: 2rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
           <a href="reglamento.html" class="btn btn-primary">
@@ -298,36 +280,13 @@
       </div>
     </header>
 
-    <section class="section">
+    <section class="section" id="estructura">
       <div class="container">
         <p class="eyebrow">Órganos de gobierno</p>
         <h2 class="display-md" style="margin-top: 0.75rem;">Estructura institucional</h2>
-        <p style="margin-top: 1.5rem; font-size: 1.0625rem; line-height: 1.7; color: var(--ink-700); max-width: 720px;">
+        <p class="texto-institucional">
           El Reglamento establece dos órganos que coordinan el funcionamiento de la Red: la Asamblea de Miembros, que define los lineamientos estratégicos, y el Comité Ejecutivo, que administra y representa a la Red ante terceros. Las comisiones ad hoc se crean según las necesidades temáticas que determine el Comité.
         </p>
-
-        <div class="gobernanza-grid">
-          <div class="mvv-card-large">
-            <p class="eyebrow">Artículo 5</p>
-            <h3>Asamblea de Miembros</h3>
-            <p>Integrada por un representante titular y un suplente por cada universidad miembro. Define lineamientos generales, aprueba el plan anual, elige al Comité Ejecutivo y resuelve admisiones y bajas. Se reúne al menos dos veces al año.</p>
-            <p style="margin-top: 1rem;"><a href="reglamento.html#articulo-5" style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em;">Ver Art. 5 ↓</a></p>
-          </div>
-
-          <div class="mvv-card-large">
-            <p class="eyebrow">Artículo 6</p>
-            <h3>Comité Ejecutivo</h3>
-            <p>Órgano de administración y representación de la Red. Integrado por Presidente, Vicepresidente y Secretario, de universidades distintas, con mandato de dos años. No hay reelección inmediata en el mismo cargo.</p>
-            <p style="margin-top: 1rem;"><a href="reglamento.html#articulo-6" style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em;">Ver Art. 6 ↓</a></p>
-          </div>
-
-          <div class="mvv-card-large">
-            <p class="eyebrow">Artículo 12</p>
-            <h3>Comisiones ad hoc</h3>
-            <p>El Comité Ejecutivo puede crear comisiones ad hoc para trabajar temáticas específicas, determinando su vigencia y supervisando su trabajo. Actualmente no hay comisiones formalmente activas; se informará en esta página cuando se conformen.</p>
-            <p style="margin-top: 1rem;"><a href="reglamento.html#articulo-12" style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em;">Ver Art. 12 ↓</a></p>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -335,56 +294,11 @@
       <div class="container">
         <p class="eyebrow">Comité Ejecutivo</p>
         <h2 class="display-md" style="margin-top: 0.75rem;">Autoridades vigentes</h2>
-        <p style="margin-top: 1.5rem; font-size: 1.0625rem; line-height: 1.7; color: var(--ink-700); max-width: 720px;">
-          El primer Comité Ejecutivo será electo por la Asamblea de Miembros en su sesión fundacional. Los tres cargos — Presidente, Vicepresidente y Secretario — deben corresponder a representantes de universidades distintas, según establece el Art. 6 del Reglamento.
+        <p class="texto-institucional">
+          El primer Comité Ejecutivo de la Red está constituido por los cargos de Presidente, Vicepresidente y Secretario, electos en votación por la Asamblea de Miembros. Cada cargo es ejercido por miembros de distintas universidades.
         </p>
 
-        <div class="aviso-provisorio">
-          <strong>Información provisoria.</strong> Los cargos del Comité Ejecutivo se formalizarán en la Asamblea fundacional de RIISUPA. Esta página se actualizará con los nombres, universidades y períodos de mandato correspondientes una vez aprobada la elección.
-        </div>
-
-        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 2rem;">
-
-          <article class="autoridad-card">
-            <p class="autoridad-role">Presidente</p>
-            <p class="autoridad-nombre placeholder">A designar</p>
-            <p class="autoridad-uni">Universidad miembro · por confirmar</p>
-            <dl>
-              <div>
-                <dt>Período de mandato</dt>
-                <dd>2 años desde la elección en Asamblea fundacional</dd>
-              </div>
-            </dl>
-          </article>
-
-          <article class="autoridad-card">
-            <p class="autoridad-role">Vicepresidente</p>
-            <p class="autoridad-nombre placeholder">A designar</p>
-            <p class="autoridad-uni">Universidad miembro · por confirmar</p>
-            <dl>
-              <div>
-                <dt>Período de mandato</dt>
-                <dd>2 años desde la elección en Asamblea fundacional</dd>
-              </div>
-            </dl>
-          </article>
-
-          <article class="autoridad-card">
-            <p class="autoridad-role">Secretario</p>
-            <p class="autoridad-nombre placeholder">A designar</p>
-            <p class="autoridad-uni">Universidad miembro · por confirmar</p>
-            <dl>
-              <div>
-                <dt>Período de mandato</dt>
-                <dd>2 años desde la elección en Asamblea fundacional</dd>
-              </div>
-            </dl>
-          </article>
-        </div>
-
-        <p style="margin-top: 2rem; font-size: 0.875rem; color: var(--ink-500); font-family: var(--font-mono); letter-spacing: 0.02em;">
-          La reelección inmediata en el mismo cargo no está permitida (Art. 6). Los miembros salientes sí pueden ocupar otros cargos o volver en ciclos posteriores.
-        </p>
+        <div class="autoridades-grid" id="comite-cards"></div>
       </div>
     </section>
 
@@ -392,28 +306,18 @@
       <div class="container">
         <p class="eyebrow">Asamblea de Miembros</p>
         <h2 class="display-md" style="margin-top: 0.75rem;">Representantes por universidad</h2>
-        <p style="margin-top: 1.5rem; font-size: 1.0625rem; line-height: 1.7; color: var(--ink-700); max-width: 720px;">
-          Cada universidad miembro designa un representante titular y un suplente ante la Asamblea. Ambos deben desempeñarse en las áreas de Investigación, Ciencia y Tecnología de su institución, con experiencia comprobable en investigación o gestión de ciencia, tecnología e innovación.
+        <p class="texto-institucional">
+          Cada universidad miembro está representada a través de nota de aval del Rector de la institución. La Asamblea de Miembros está conformada por integrantes que se desempeñan en las áreas de Investigación, Ciencia y Tecnología de cada institución.
         </p>
 
-        <div class="aviso-provisorio">
-          <strong>Información provisoria.</strong> Los datos de representantes que aparecen a continuación son placeholders hasta que cada universidad formalice sus designaciones. Cada representación se actualiza en <code style="font-family: var(--font-mono); font-size: 0.875rem;">data.js</code> a medida que las universidades remiten el alta.
-        </div>
-
-        <div style="margin-top: 2rem;">
-          <div class="asamblea-table">
-            <div class="asamblea-row asamblea-header">
-              <p class="col-label">Universidad</p>
-              <p class="col-label">Representante titular</p>
-              <p class="col-label">Representante suplente</p>
-            </div>
-            <div id="asamblea-rows"></div>
+        <p class="results-meta" id="asamblea-meta" style="margin-top: 2.5rem;">—</p>
+        <div class="asamblea-table">
+          <div class="asamblea-row asamblea-header" aria-hidden="true">
+            <p class="col-label">Universidad</p>
+            <p class="col-label">Integrantes</p>
           </div>
+          <div id="asamblea-rows"></div>
         </div>
-
-        <p style="margin-top: 2rem; font-size: 0.875rem; color: var(--ink-500); line-height: 1.5; max-width: 720px;">
-          Para modificar los datos de representación de tu universidad, el trámite se hace desde el repositorio de GitHub mediante un Pull Request sobre <code style="font-family: var(--font-mono); font-size: 0.8125rem; color: var(--ink-600);">data.js</code>, firmado por la Secretaría de Investigación o equivalente. Cualquier cambio queda versionado con trazabilidad completa.
-        </p>
       </div>
     </section>
 
@@ -421,83 +325,29 @@
       <div class="container">
         <p class="eyebrow">Canal oficial</p>
         <h2 class="display-md" style="margin-top: 0.75rem;">Contacto de la Red</h2>
-        <p style="margin-top: 1.5rem; font-size: 1.0625rem; line-height: 1.7; color: var(--ink-700); max-width: 720px;">
-          Un único canal de contacto para todas las consultas sobre la Red. También podés seguirnos en LinkedIn para novedades, actividades y convocatorias.
+        <p class="texto-institucional">
+          Un único canal de contacto para todas las consultas sobre la Red. También podés seguirnos en LinkedIn para novedades y actividades.
         </p>
 
-        <div style="margin-top: 2.5rem; display: grid; gap: 1.25rem; grid-template-columns: 1fr;" class="contacto-canales">
-          <a href="mailto:rediisupa@gmail.com" class="contacto-canal-card">
+        <div class="contacto-canales">
+          <a href="mailto:rediisupa@gmail.com" class="contacto-canal-card" id="contacto-email">
             <div class="contacto-canal-icon" aria-hidden="true">✉</div>
             <div>
               <p class="contacto-canal-label">Correo electrónico</p>
               <p class="contacto-canal-value">rediisupa@gmail.com</p>
-              <p class="contacto-canal-hint">Consultas generales, institucionales, proyectos, prensa.</p>
+              <p class="contacto-canal-hint">Consultas generales, institucionales y de prensa.</p>
             </div>
           </a>
 
-          <a href="https://www.linkedin.com/company/red-de-investigaci%C3%B3n-e-innovaci%C3%B3n-en-salud-de-universidades-privadas-de-argentina-riisupa" target="_blank" rel="noopener" class="contacto-canal-card">
+          <a href="#" target="_blank" rel="noopener" class="contacto-canal-card" id="contacto-linkedin">
             <div class="contacto-canal-icon" aria-hidden="true">in</div>
             <div>
               <p class="contacto-canal-label">LinkedIn</p>
               <p class="contacto-canal-value">RIISUPA en LinkedIn ↗</p>
-              <p class="contacto-canal-hint">Novedades, actividades, convocatorias y ecos institucionales.</p>
+              <p class="contacto-canal-hint">Novedades, actividades y ecos institucionales.</p>
             </div>
           </a>
         </div>
-
-        <style>
-          @media (min-width: 768px) {
-            .contacto-canales { grid-template-columns: 1fr 1fr !important; }
-          }
-          .contacto-canal-card {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 1.25rem;
-            padding: 1.75rem;
-            background: white;
-            border: 1px solid var(--rule);
-            text-decoration: none;
-            color: inherit;
-            transition: border-color 180ms ease;
-            align-items: start;
-          }
-          .contacto-canal-card:hover { border-color: var(--primary-400); }
-          .contacto-canal-icon {
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--primary-50);
-            color: var(--primary-800);
-            font-family: var(--font-serif);
-            font-size: 1.375rem;
-            font-weight: 500;
-          }
-          .contacto-canal-label {
-            font-family: var(--font-mono);
-            font-size: 0.6875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--ink-500);
-            margin: 0;
-          }
-          .contacto-canal-value {
-            font-family: var(--font-serif);
-            font-size: 1.25rem;
-            color: var(--ink-900);
-            font-weight: 500;
-            margin: 0.25rem 0 0.5rem;
-            letter-spacing: -0.02em;
-          }
-          .contacto-canal-hint {
-            font-size: 0.875rem;
-            color: var(--ink-600);
-            margin: 0;
-            line-height: 1.5;
-          }
-        </style>
-
       </div>
     </section>
 
@@ -510,45 +360,56 @@
   <script>
     RIISUPA_UI.mount('la-red');
 
-    /* Renderizar filas de la asamblea con los representantes de data.js */
-    const universidades = [...RIISUPA.universidades]
-      .filter(u => u.activa)
-      .sort((a, b) => a.sigla.localeCompare(b.sigla));
+    const { escapeHTML, getUniversidad, integrantesDe } = RIISUPA.helpers;
 
-    const rows = universidades.map(u => {
-      const titular = u.representanteTitular || {};
-      const suplente = u.representanteSuplente;
-      const titularHtml = titular.nombre ? `
-        <div>
-          <p class="rep-nombre">${RIISUPA.helpers.escapeHTML(titular.nombre)}</p>
-          <p class="rep-cargo">${RIISUPA.helpers.escapeHTML(titular.cargo || '')}</p>
-        </div>
-      ` : '<p class="rep-cargo" style="font-style: italic; color: var(--ink-400);">Por confirmar</p>';
-      const suplenteHtml = suplente && suplente.nombre ? `
-        <div>
-          <p class="rep-nombre">${RIISUPA.helpers.escapeHTML(suplente.nombre)}</p>
-          <p class="rep-cargo">${RIISUPA.helpers.escapeHTML(suplente.cargo || '')}</p>
-        </div>
-      ` : '<p class="rep-cargo" style="font-style: italic; color: var(--ink-400);">Por confirmar</p>';
+    /* Contacto: un solo lugar para el mail y el LinkedIn (data.js) */
+    const mail = document.getElementById('contacto-email');
+    mail.href = 'mailto:' + RIISUPA.contacto.email;
+    mail.querySelector('.contacto-canal-value').textContent = RIISUPA.contacto.email;
+    document.getElementById('contacto-linkedin').href = RIISUPA.contacto.linkedin;
+
+    /* Comité Ejecutivo */
+    document.getElementById('comite-cards').innerHTML = RIISUPA.comiteEjecutivo.map(a => {
+      const u = getUniversidad(a.universidad);
       return `
-        <div class="asamblea-row">
+        <article class="autoridad-card">
+          <p class="autoridad-role">${escapeHTML(a.cargo)}</p>
+          <p class="autoridad-nombre">${escapeHTML(a.nombre)}</p>
+          <p class="autoridad-uni">${u ? `<a href="universidades.html#${u.id}">${escapeHTML(u.nombre)}</a>` : ''}</p>
+          <p class="autoridad-periodo">Período ${escapeHTML(a.periodo)}</p>
+        </article>
+      `;
+    }).join('');
+
+    /* Asamblea de Miembros: todas las personas, agrupadas por universidad */
+    const universidades = [...RIISUPA.universidades]
+      .sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'));
+
+    document.getElementById('asamblea-rows').innerHTML = universidades.map(u => {
+      const personas = integrantesDe(u.id);
+      const lista = personas.length
+        ? `<ul class="integrantes-lista">${personas.map(p => `
+            <li>
+              <p class="rep-nombre">${escapeHTML(p.nombre)}</p>
+              <p class="rep-cargo">${escapeHTML(p.cargo)}</p>
+            </li>`).join('')}
+          </ul>`
+        : '<p class="rep-cargo" style="font-style: italic;">Por confirmar</p>';
+      return `
+        <div class="asamblea-row" id="asamblea-${u.id}">
           <div>
-            <p class="asamblea-uni-nombre"><a href="universidades.html#${u.id}">${RIISUPA.helpers.escapeHTML(u.nombre)}</a></p>
-            <p class="asamblea-uni-sigla">${RIISUPA.helpers.escapeHTML(u.sigla)} · ${RIISUPA.helpers.escapeHTML(u.provincia)}</p>
+            <p class="asamblea-uni-nombre"><a href="universidades.html#${u.id}">${escapeHTML(u.nombre)}</a></p>
+            <p class="asamblea-uni-sedes">${escapeHTML(u.sigla)} · ${u.sedes.map(escapeHTML).join(', ')}</p>
           </div>
-          ${titularHtml}
-          ${suplenteHtml}
+          ${lista}
         </div>
       `;
     }).join('');
-    document.getElementById('asamblea-rows').innerHTML = rows;
 
-    if (window.location.hash) {
-      setTimeout(() => {
-        const target = document.querySelector(window.location.hash);
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 100);
-    }
+    document.getElementById('asamblea-meta').innerHTML =
+      `<strong>${RIISUPA.integrantes.length}</strong> integrantes · <strong>${universidades.length}</strong> universidades`;
+
+    RIISUPA_UI.scrollToHash();
   </script>
 </body>
 </html>
