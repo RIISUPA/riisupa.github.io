@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="theme-color" content="#0C447C" />
+  <title>RIISUPA · Investigación en Salud, en Red</title>
+  <meta name="description" content="Red de Investigación e Innovación en Salud de Universidades de Gestión Privada de Argentina. Una iniciativa conjunta de 20 universidades, orientada al fortalecimiento de la investigación y la innovación en salud." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="RIISUPA · Investigación en Salud, en Red" />
+  <meta property="og:description" content="Una iniciativa conjunta impulsada por universidades de gestión privada de Argentina, orientada al fortalecimiento de la investigación y la innovación en salud." />
+  <meta property="og:locale" content="es_AR" />
+  <meta property="og:site_name" content="RIISUPA" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="RIISUPA · Investigación en Salud, en Red" />
+  <meta name="twitter:description" content="Una iniciativa conjunta impulsada por universidades de gestión privada de Argentina, orientada al fortalecimiento de la investigación y la innovación en salud." />
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" />
+  <link rel="stylesheet" href="assets/css/riisupa.css" />
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Saltar al contenido principal</a>
+
+  <div data-slot="header"></div>
+
+  <main id="main">
+
+    <!-- HERO -------------------------------------------------------------- -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <h1 class="display-xl text-balance">
+          Investigar e innovar en salud,
+          <span class="italic-accent">en red.</span>
+        </h1>
+        <p class="lead" style="margin-top: 2rem; max-width: 720px;">
+          Una iniciativa conjunta impulsada por universidades de gestión privada de Argentina, orientada al fortalecimiento de la investigación y la innovación en salud.
+        </p>
+        <div class="hero-cta">
+          <a href="la_red.html" class="btn btn-primary">
+            Conocer la Red
+            <span aria-hidden="true">→</span>
+          </a>
+          <a href="universidades.html" class="btn btn-ghost">
+            Universidades miembro
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- NODOS TEMÁTICOS ---------------------------------------------------- -->
+    <section class="section" id="nodos">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Ejes temáticos</p>
+            <h2 class="display-md" style="margin-top: 0.75rem;">Líneas de investigación</h2>
+          </div>
+        </div>
+        <p class="section-intro">
+          Las universidades miembros de la Red investigan, principalmente, en estos nodos temáticos:
+        </p>
+        <ol class="nodos-grid" id="nodos-listado"></ol>
+      </div>
+    </section>
+
+    <!-- CALENDARIO DE EFEMÉRIDES + INICIATIVAS INSTITUCIONALES ------------ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Calendario compartido</p>
+            <h2 class="display-md" style="margin-top: 0.75rem;">Efemérides e iniciativas institucionales</h2>
+          </div>
+          <a href="eventos.html" class="section-link">Ver calendario completo →</a>
+        </div>
+        <p class="section-intro">
+          Actividades organizadas por universidades miembro en el marco de efemérides temáticas o iniciativas institucionales propias, con invitación abierta a la Red.
+        </p>
+        <div id="efemerides-listado" style="display: flex; flex-direction: column; gap: 1rem;"></div>
+      </div>
+    </section>
+
+    <!-- EVENTOS DE LA RED ------------------------------------------------- -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Agenda</p>
+            <h2 class="display-md" style="margin-top: 0.75rem;">Próximos eventos de la Red</h2>
+          </div>
+          <a href="eventos.html" class="section-link">Ver todos los eventos →</a>
+        </div>
+        <p class="section-intro">
+          Webinars, jornadas, talleres y asambleas de la Red.
+        </p>
+        <div id="eventos-listado" style="display: flex; flex-direction: column; gap: 1rem;"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <div data-slot="footer"></div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/riisupa.js"></script>
+  <script>
+    RIISUPA_UI.mount('inicio');
+
+    const { escapeHTML, getUniversidad } = RIISUPA.helpers;
+    const ahora = new Date();
+    const CALENDARIO = ['efemeride', 'iniciativa-institucional'];
+
+    /* -----------------------------------------------------------
+       Nodos temáticos (solo el nombre de cada nodo)
+       ----------------------------------------------------------- */
+    document.getElementById('nodos-listado').innerHTML = RIISUPA.nodos.map((n, i) => `
+      <li class="nodo-card" id="nodo-${n.id}">
+        <span class="nodo-num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>
+        <h3 class="nodo-nombre">${escapeHTML(n.nombre)}</h3>
+      </li>
+    `).join('');
+
+    /* -----------------------------------------------------------
+       Actividades: calendario compartido + agenda de la Red
+       ----------------------------------------------------------- */
+    function tarjeta(e) {
+      const f = RIISUPA_UI.partesFecha(e.fechaInicio);
+      const organizador = e.organizador ? getUniversidad(e.organizador) : null;
+      const esCalendario = CALENDARIO.includes(e.tipo);
+      const dias = RIISUPA_UI.diasHasta(e.fechaInicio);
+      const cuando = dias <= 0 ? 'Hoy' : dias === 1 ? 'Mañana' : `en ${dias} días`;
+      return `
+        <a href="eventos.html#${e.id}" class="evento-card">
+          <div class="evento-fecha-block">
+            <div class="evento-fecha-dia">${f.dia}</div>
+            <div class="evento-fecha-mes">${f.mes}</div>
+            <div class="evento-fecha-anio">${f.anio}</div>
+          </div>
+          <div>
+            <div class="evento-body-head">
+              <span class="tag ${esCalendario && e.tipo === 'efemeride' ? 'tag-accent' : 'tag-primary'}">${RIISUPA.tipoEventoLabels[e.tipo] || e.tipo}</span>
+              ${!esCalendario ? `<span class="tag tag-accent">${cuando}</span>` : ''}
+              ${e.modalidad ? `<span class="tag">${RIISUPA.modalidadLabels[e.modalidad] || e.modalidad}</span>` : ''}
+              ${organizador ? `<span class="tag">Organiza: ${escapeHTML(organizador.sigla)}</span>` : ''}
+            </div>
+            <h3 class="evento-titulo">${escapeHTML(e.titulo)}</h3>
+            ${e.resumen ? `<p class="evento-resumen">${escapeHTML(e.resumen)}</p>` : ''}
+            <div class="evento-meta">
+              <span class="evento-meta-item">${RIISUPA_UI.formatoFechaHora(e.fechaInicio)}</span>
+            </div>
+          </div>
+        </a>
+      `;
+    }
+
+    function renderLista(id, eventos, vacio) {
+      document.getElementById(id).innerHTML = eventos.length
+        ? eventos.map(tarjeta).join('')
+        : `<p class="lista-vacia">${vacio}</p>`;
+    }
+
+    const proximos = RIISUPA.eventos
+      .filter(e => RIISUPA_UI.esProximo(e, ahora))
+      .sort((a, b) => RIISUPA_UI.parseFecha(a.fechaInicio) - RIISUPA_UI.parseFecha(b.fechaInicio));
+
+    renderLista(
+      'efemerides-listado',
+      proximos.filter(e => CALENDARIO.includes(e.tipo)).slice(0, 4),
+      'Próximamente vas a encontrar acá las efemérides e iniciativas institucionales de las universidades miembro.'
+    );
+    renderLista(
+      'eventos-listado',
+      proximos.filter(e => !CALENDARIO.includes(e.tipo)).slice(0, 4),
+      `Por el momento no hay eventos programados. Seguinos en <a href="${RIISUPA.contacto.linkedin}" target="_blank" rel="noopener">LinkedIn</a> para enterarte de las próximas actividades.`
+    );
+
+    RIISUPA_UI.scrollToHash();
+  </script>
+</body>
+</html>
